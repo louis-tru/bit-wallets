@@ -4,13 +4,13 @@ import { GUIApplication, Root, Indep, Button, Hybrid, } from 'langou';
 import { NavpageCollection, Toolbar, Navpage } from 'langou/nav';
 import { alert } from 'langou/dialog';
 
-import 'ajv';
-import 'bn.js';
+import 'crypto-tx';
+import 'safe-tx';
 
 var default_toolbar_vx = (
 	<Toolbar>
 		<Hybrid textAlign="center" width="full" height="full">
-			<Button onClick=(e=>alert('ABCDEFG')) backgroundColor="#f00">ok</Button>
+			<Button onClick=(e=>alert(Object.keys(crypto_tx)+'')) backgroundColor="#f00">ok</Button>
 		</Hybrid>
 	</Toolbar>
 )
