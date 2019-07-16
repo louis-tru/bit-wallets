@@ -28,24 +28,32 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import { GUIApplication, Root } from 'langou';
-import { NavpageCollection } from 'langou/nav';
-import Index from './pages/index';
-import toolbar from './toolbar';
+import { Indep,Button } from 'langou';
+import { Navpage } from 'langou/nav';
+import { alert } from 'langou/dialog';
 
-new GUIApplication({
-	multisample: 4,
-	width: 420,
-	height: 800,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavpageCollection id="npc" defaultToolbar=toolbar>
-			<Index />
-		</NavpageCollection>
-	</Root>
-);
+/*
+ * @class Index Page
+ */
+export default class Index extends Navpage {
+
+	constructor() {
+		super();
+		this.title = '钱包';
+	}
+
+	m_handle_click(e) {
+		// alert('Hello world', e=>{
+		this.collection.push(<Index/>, 1);
+		// });
+	}
+
+	loadView() {
+		super.loadView(
+			<Indep alignX="center" alignY="center" backgroundColor="#0f0">
+				<Button onClick="m_handle_click">Hello world</Button>
+			</Indep>
+		);
+	}
+
+}

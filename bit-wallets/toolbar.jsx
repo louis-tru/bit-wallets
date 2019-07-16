@@ -28,24 +28,15 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import { GUIApplication, Root } from 'langou';
-import { NavpageCollection } from 'langou/nav';
-import Index from './pages/index';
-import toolbar from './toolbar';
+import { Hybrid, Button } from 'langou';
+import { Toolbar } from 'langou/nav';
+import { alert } from 'langou/dialog';
 
-new GUIApplication({
-	multisample: 4,
-	width: 420,
-	height: 800,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavpageCollection id="npc" defaultToolbar=toolbar>
-			<Index />
-		</NavpageCollection>
-	</Root>
+export default var default_toolbar_vx = (
+	<Toolbar>
+		<Hybrid textAlign="center" width="full" height="full">
+			<Button onClick=(e=>alert('Toolbar')) backgroundColor="#f00">ok</Button>
+		</Hybrid>
+	</Toolbar>
 );
+
