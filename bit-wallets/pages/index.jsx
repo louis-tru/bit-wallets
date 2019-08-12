@@ -36,11 +36,7 @@ import { alert } from 'langou/dialog';
  * @class Index Page
  */
 export default class Index extends Navpage {
-
-	constructor() {
-		super();
-		this.title = '钱包';
-	}
+	m_title = '钱包';
 
 	m_handle_click(e) {
 		// alert('Hello world', e=>{
@@ -48,8 +44,8 @@ export default class Index extends Navpage {
 		// });
 	}
 
-	loadView() {
-		super.loadView(
+	render() {
+		return super.render(
 			<Indep alignX="center" alignY="center" backgroundColor="#0f0">
 				<Button onClick="m_handle_click">Hello world</Button>
 			</Indep>

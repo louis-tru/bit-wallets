@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import 'langou/util';
-import { GUIApplication, Root } from 'langou';
+import { GUIApplication, Root, ViewController } from 'langou';
 import { NavpageCollection } from 'langou/nav';
 import Index from './pages/index';
 import toolbar from './toolbar';
@@ -43,9 +43,11 @@ new GUIApplication({
 	background: 0xffffff,
 	title: 'BITWallets',
 }).start(
-	<Root>
-		<NavpageCollection id="npc" defaultToolbar=toolbar>
-			<Index />
-		</NavpageCollection>
-	</Root>
+	<ViewController>
+		<Root>
+			<NavpageCollection id="npc" defaultToolbar=toolbar()>
+				<Index />
+			</NavpageCollection>
+		</Root>
+	</ViewController>
 );

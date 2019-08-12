@@ -32,7 +32,7 @@ import { Hybrid, Button } from 'langou';
 import { Toolbar } from 'langou/nav';
 import { alert } from 'langou/dialog';
 
-export default var default_toolbar_vx = (
+export default var default_toolbar_vx = e=>(
 	<Toolbar>
 		<Hybrid textAlign="center" width="full" height="full">
 			<Button onClick=(e=>alert('Toolbar')) backgroundColor="#f00">ok</Button>
