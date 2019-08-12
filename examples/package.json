@@ -1,0 +1,8 @@
+{
+	"name": "examples",
+	"appName":	"Langou-Examples",
+	"id": "org.langou.examples",
+	"main":	"index.jsx",
+	"version": "1.0.0",
+	"langouSyntax": true
+}
