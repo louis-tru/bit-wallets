@@ -2,7 +2,7 @@
   "name": "bit-wallets",
   "appName": "BITWallets",
   "id": "org.langou.bit-wallets",
-  "main": "index.jsx",
+  "main": "main.jsx",
   "version": "1.0.0",
   "langouSyntax": true,
 	"dependencies": {

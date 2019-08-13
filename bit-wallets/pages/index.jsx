@@ -28,27 +28,48 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Indep,Button } from 'langou';
-import { Navpage } from 'langou/nav';
+import { Indep,Button,Hybrid,Div, atomPixel } from 'langou';
+import { NavPage, Toolbar, Navbar } from 'langou/nav';
 import { alert } from 'langou/dialog';
 
-/*
- * @class Index Page
+/**
+ * @class IndexToolbar
  */
-export default class Index extends Navpage {
-	m_title = '钱包';
+class IndexToolbar extends Toolbar {
 
 	m_handle_click(e) {
-		// alert('Hello world', e=>{
-		this.collection.push(<Index/>, 1);
-		// });
+		alert('Toolbar');
 	}
 
 	render() {
 		return super.render(
-			<Indep alignX="center" alignY="center" backgroundColor="#0f0">
+			<Hybrid textAlign="center" width="full" height="full">
+				<Button onClick="m_handle_click" backgroundColor="#f00" margin="auto" height=24 width=24>ok</Button>
+			</Hybrid>
+		);
+	}
+}
+
+/*
+ * @class Index Page
+ */
+export default class Index extends NavPage {
+
+	constructor() {
+		super();
+		this.title = '钱包';
+		this.toolbar = <IndexToolbar />;
+	}
+
+	m_handle_click(e) {
+		// this.collection.push(<Index toolbar.hidden=true />, 1);
+	}
+
+	render() {
+		return super.render(
+			<Div>
 				<Button onClick="m_handle_click">Hello world</Button>
-			</Indep>
+			</Div>
 		);
 	}
 
