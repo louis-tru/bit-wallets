@@ -100,7 +100,7 @@ class IndexNavbar extends Navbar {
 				<OButton onClick=(e=>this.m_handle_add_2())>Menu C</OButton>
 				<OButton onClick=(e=>this.m_handle_add_3())>Menu D</OButton>
 			</Overlay>
-		).showOverlayWithView(e.sender);
+		).showOverlayFromView(e.sender);
 	}
 
 	render() {
