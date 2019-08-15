@@ -1,3 +1,4 @@
 out
-libs
+node_modules
 Project
+.vscode

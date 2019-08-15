@@ -29,6 +29,8 @@
  * ***** END LICENSE BLOCK ***** */
 
 import 'langou/util';
+import 'langou/font';
+import 'langou/reader';
 import { GUIApplication, Root } from 'langou';
 import { NavPageCollection } from 'langou/nav';
 import Index from './pages/index';
@@ -48,3 +50,5 @@ new GUIApplication({
 		</NavPageCollection>
 	</Root>
 );
+
+font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );

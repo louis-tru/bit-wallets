@@ -28,9 +28,89 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Indep,Button,Hybrid,Div, atomPixel } from 'langou';
+import { Indep,Button,Hybrid,Div,render, CSS, atomPixel as px, ViewController } from 'langou';
 import { NavPage, Toolbar, Navbar } from 'langou/nav';
 import { alert } from 'langou/dialog';
+import { Overlay } from 'langou/overlay';
+
+CSS({
+
+	'.o_btn': {
+		width: "full",
+		textLineHeight: 45,
+		textAlign: "left",
+		borderRadius: 0,
+		borderBottom: `${px} #c8c7cc`,
+		textColor: "#0079ff",
+	},
+	
+	'.o_btn:normal': {
+		backgroundColor: '#fff0', time: 180
+	},
+	
+	'.o_btn:hover': {
+		backgroundColor: '#ececec', time: 50
+	},
+	
+	'.o_btn:down': {
+		backgroundColor: '#E1E4E4', time: 50
+	},
+
+});
+
+class OButton extends ViewController {
+
+	event onClick;
+
+	render(...vdoms) {
+		return (
+			<Button class="o_btn" defaultHighlighted=0 onClick=this.onClick>
+				<Hybrid marginLeft=16 marginRight=16>{vdoms}</Hybrid>
+			</Button>
+		);
+	}
+}
+
+/**
+ * @class IndexNavbar
+ */
+class IndexNavbar extends Navbar {
+
+	m_handle_add_0() {
+		alert('m_handle_add_0');
+	}
+
+	m_handle_add_1() {
+		alert('m_handle_add_1');
+	}
+
+	m_handle_add_2() {
+		alert('m_handle_add_2');
+	}
+
+	m_handle_add_3() {
+		alert('m_handle_add_3');
+	}
+
+	m_handle_click(e) {
+		render(
+			<Overlay>
+				<OButton onClick=(e=>this.m_handle_add_0())>Menu A</OButton>
+				<OButton onClick=(e=>this.m_handle_add_1())>Menu B------C</OButton>
+				<OButton onClick=(e=>this.m_handle_add_2())>Menu C</OButton>
+				<OButton onClick=(e=>this.m_handle_add_3())>Menu D</OButton>
+			</Overlay>
+		).showOverlayWithView(e.sender);
+	}
+
+	render() {
+		return super.render(
+			<Indep alignX="right" alignY="center" x=-10>
+				<Button textFamily="icomoon-ultimate" textColor="#fff" textSize=20 onClick="m_handle_click">\ued5d</Button>
+			</Indep>
+		);
+	}
+}
 
 /**
  * @class IndexToolbar
@@ -58,6 +138,7 @@ export default class Index extends NavPage {
 	constructor() {
 		super();
 		this.title = '钱包';
+		this.navbar = <IndexNavbar />;
 		this.toolbar = <IndexToolbar />;
 	}
 
