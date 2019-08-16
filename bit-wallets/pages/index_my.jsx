@@ -28,28 +28,23 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import 'langou/font';
-import 'langou/reader';
-import { GUIApplication, Root } from 'langou';
-import { NavPageCollection } from 'langou/nav';
-import Index from './pages/index';
-// import './cn';
+import { 
+	Div, Hybrid, CSS, ViewController
+} from 'langou';
 
-new GUIApplication({
-	multisample: 4,
-	width: 420,
-	height: 800,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			<Index />
-		</NavPageCollection>
-	</Root>
-);
+CSS({
 
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+});
+
+export default class IndexMy extends ViewController {
+
+	title = '我';
+
+	render() {
+		return (
+			<Div class="index">
+				<Hybrid textAlign="center" width="100%" height=20 margin="auto">我</Hybrid>
+			</Div>
+		);
+	}
+}

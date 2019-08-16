@@ -28,28 +28,9 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import 'langou/font';
-import 'langou/reader';
-import { GUIApplication, Root } from 'langou';
-import { NavPageCollection } from 'langou/nav';
-import Index from './pages/index';
-// import './cn';
+import {CONSTS} from 'langou/dialog';
 
-new GUIApplication({
-	multisample: 4,
-	width: 420,
-	height: 800,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			<Index />
-		</NavPageCollection>
-	</Root>
-);
-
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+Object.assign(CONSTS, {
+	OK: '确认',
+	CANCEL: '取消',
+});

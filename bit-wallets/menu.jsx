@@ -28,28 +28,51 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import 'langou/font';
-import 'langou/reader';
-import { GUIApplication, Root } from 'langou';
-import { NavPageCollection } from 'langou/nav';
-import Index from './pages/index';
-// import './cn';
+import {Div, CSS, atomPixel as px, ViewController, Button, Text, Hybrid} from 'langou';
+import { Overlay } from 'langou/overlay';
 
-new GUIApplication({
-	multisample: 4,
-	width: 420,
-	height: 800,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			<Index />
-		</NavPageCollection>
-	</Root>
-);
+CSS({
 
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+	'.o_btn': {
+		width: "full",
+		textLineHeight: 45,
+		textAlign: "left",
+		borderRadius: 0,
+		borderBottom: `${px} #c8c7cc`,
+		textColor: "#0079ff",
+	},
+	
+	'.o_btn:normal': {
+		backgroundColor: '#fff0', time: 180
+	},
+	
+	'.o_btn:hover': {
+		backgroundColor: '#ececec', time: 50
+	},
+	
+	'.o_btn:down': {
+		backgroundColor: '#E1E4E4', time: 50
+	},
+
+});
+
+export default class Menu extends Overlay {
+
+	event onItemAction;
+
+	render() {
+		return super.render(
+			this.items.map(({icon,text},i)=>(
+				<Button class="o_btn" defaultHighlighted=0 onClick=(e=>this.triggerItemAction(i))>
+					{ icon ?
+						<Text textFamily="icomoon-ultimate" marginLeft=16 value=icon />: null
+					}
+					<Hybrid marginLeft=12 marginRight=16>{text}</Hybrid>
+				</Button>
+			))
+		);
+	}
+
+}
+
+Menu.defineProps({ items:[] });
