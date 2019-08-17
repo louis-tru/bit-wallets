@@ -42,7 +42,7 @@ import IndexMy from './index_my';
 CSS({
 	'.index': {
 		width: '100%',
-		// height: '100%',
+		height: '100%',
 	},
 	'.toolbar_btn': {
 		marginTop: 8,
