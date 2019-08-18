@@ -28,9 +28,74 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Hybrid } from 'langou';
+import { Div, Image, Indep, Input, CSS } from 'langou';
 import { NavPage } from 'langou/nav';
+import { alert, confirm } from 'langou/dialog';
+import { NavBtn2, Btn } from '../btns';
 
+const {resolve} = require;
+
+CSS({
+	'.create': {
+		width: '100%',
+		height: '100%',
+	},
+	'.create .img': {
+		width: 60,
+		height: 60,
+		backgroundColor: '#f00',
+		margin: '40 auto 30 auto',
+	},
+	'.create .input': {
+		width: 'full',
+		height: 38,
+		margin: '10 20 0 20',
+		backgroundColor: '#f4f4f4',
+		borderRadius: 5,
+		textSize: 14,
+	},
+	'.create .btns': {
+		width: '20!',
+		alignY: 'bottom',
+		alignX: 'left',
+		x: 10,
+		y: -10,
+	},
+});
+
+/**
+ * @class Create
+*/
+class Create extends NavPage {
+	constructor() {
+		super();
+		this.title = '添加XXX钱包';
+		this.toolbar.hidden = true;
+	}
+	render() {
+		return super.render(
+			<Div class="create">
+				<Image class="img" src=(resolve(`../img/${this.type}-60.png`)) />
+				<Input class="input" textMargin=15 placeholder="钱包名称" />
+				<Input class="input" textMargin=15 security=1 placeholder="钱包密码" />
+				<Input class="input" textMargin=15 security=1 placeholder="重复输入密码" />
+				<Input class="input" textMargin=15 placeholder="密码提示信息" />
+				<Indep class="btns">
+					<Btn onClick="m_handle_click">创建</Btn>
+				</Indep>
+			</Div>
+		);
+	}
+	m_handle_click() {
+		alert('创建');
+	}
+}
+
+Create.defineProps(['type']);
+
+/**
+ * @class AddWallets
+ */
 export default class AddWallets extends NavPage {
 
 	constructor() {
@@ -39,10 +104,28 @@ export default class AddWallets extends NavPage {
 		this.toolbar.hidden = true;
 	}
 
+	m_handle_click(e) {
+		var id = e.sender.id;
+		if (id == 'btc') {
+			// confirm('是否要创建钱包BTC', (e)=>{
+			// 	if (e) {
+					setTimeout(e=>this.collection.push(<Create type="BTC" title="创建 BTC 钱包" />, 1), 1);
+			// 	}
+			// });
+		} else if (id == 'eth') {
+			// confirm('是否要创建钱包ETH', (e)=>{
+			// 	if (e) {
+					setTimeout(e=>this.collection.push(<Create type="ETH" title="创建 ETHEREUM 钱包" />, 1), 1);
+			// 	}
+			// });
+		}
+	}
+
 	render() {
 		return super.render(
 			<Div class="index">
-				<Hybrid textAlign="center" width="100%" height=20 margin="auto">add wallets</Hybrid>
+				<NavBtn2 id="btc" icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
+				<NavBtn2 id="eth" icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH" />
 			</Div>
 		);
 	}

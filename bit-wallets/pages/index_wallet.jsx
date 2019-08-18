@@ -29,52 +29,11 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Hybrid,Div, CSS, Image,
-	atomPixel as px, TextNode, Text, Scroll, ViewController
+	Scroll, ViewController
 } from 'langou';
+import { NavBtn } from '../btns';
 
 const {resolve} = require;
-
-CSS({
-	'.iwitem': {
-		width: '100%',
-		height: 60,
-	},
-	'.iwitem:normal': {
-		backgroundColor: '#fff0', time: 50
-	},
-	'.iwitem:hover': {
-		backgroundColor: '#ececec', time: 50
-	},
-	'.iwitem:down': {
-		backgroundColor: '#E1E4E4', time: 50
-	},
-	'.iwitem .img': {
-		width: 30,
-		margin: 'auto 10',
-	},
-	'.iwitem .con': {
-		width: '50!',
-		height: 'full',
-		contentAlign: 'top',
-		borderBottom: `${px} #BBBBBB`,
-	},
-	'.iwitem .con .left': {
-		width: '125!',
-		height: 28,
-		margin: 'auto 0 auto 5',
-		textSize: 17,
-		textWhiteSpace: 'no_wrap',
-		textOverflow: 'ellipsis',
-	},
-	'.iwitem .con .right': {
-		width: 100,
-		height: 40,
-		margin: 'auto 20 auto 0',
-		textSize: 14,
-		textAlign: 'right',
-	},
-});
 
 export default class IndexWallet extends ViewController {
 
@@ -87,26 +46,8 @@ export default class IndexWallet extends ViewController {
 	render() {
 		return (
 			<Scroll class="index">
-				<Div class="iwitem" onClick="m_handle_click">
-					<Image class="img" src=(resolve('../img/BTC-60.png')) />
-					<Div class="con">
-						<Text class="left" value="BTC-Wallet" />
-						<Hybrid class="right">
-							<TextNode value="0\n" textColor="#8F8E94" />
-							<TextNode value="$ 0.00" />
-						</Hybrid>
-					</Div>
-				</Div>
-				<Div class="iwitem" onClick="m_handle_click">
-					<Image class="img" src=(resolve('../img/ETH-60.png')) />
-					<Div class="con">
-						<Text class="left" value="ETH-Wallet" />
-						<Hybrid class="right">
-							<TextNode value="0\n" textColor="#8F8E94" />
-							<TextNode value="$ 0.00" />
-						</Hybrid>
-					</Div>
-				</Div>
+				<NavBtn icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
+				<NavBtn icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
 			</Scroll>
 		);
 	}
