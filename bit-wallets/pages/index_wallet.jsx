@@ -31,7 +31,7 @@
 import { 
 	Scroll, ViewController
 } from 'langou';
-import { NavBtn } from '../btns';
+import { BtnItem } from '../btns';
 
 const {resolve} = require;
 
@@ -46,8 +46,8 @@ export default class IndexWallet extends ViewController {
 	render() {
 		return (
 			<Scroll class="index">
-				<NavBtn icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
-				<NavBtn icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
+				<BtnItem icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
+				<BtnItem icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
 			</Scroll>
 		);
 	}

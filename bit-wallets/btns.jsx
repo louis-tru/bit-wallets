@@ -84,9 +84,9 @@ CSS({
 });
 
 /**
- * @class NavBtn
+ * @class BtnItem
  */
-export class NavBtn extends ViewController {
+export class BtnItem extends ViewController {
 	render() {
 		return (
 			<Div class="iwitem" onClick=this.onClick>
@@ -107,12 +107,12 @@ export class NavBtn extends ViewController {
 	event onClick;
 }
 
-NavBtn.defineProps(['icon', 'text', 'balance', 'money', 'desc' ]);
+BtnItem.defineProps(['icon', 'text', 'balance', 'money', 'desc' ]);
 
 /**
  * @class NavBtn
  */
-export class NavBtn2 extends ViewController {
+export class NavBtn extends ViewController {
 	render() {
 		return (
 			<Div class="iwitem" onClick=this.onClick>
@@ -132,7 +132,7 @@ export class NavBtn2 extends ViewController {
 	event onClick;
 }
 
-NavBtn2.defineProps(['icon', 'text', 'desc']);
+NavBtn.defineProps(['icon', 'text', 'desc']);
 
 CSS({
 	'.long_btn': {

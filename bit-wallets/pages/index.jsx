@@ -29,8 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Indep,Button,Hybrid,Div,render, CSS, Image,
-	atomPixel as px, TextNode, Text, Scroll,
+	Indep,Button,Hybrid,Div,render, CSS, TextNode,
 } from 'langou';
 import { NavPage, Toolbar, Navbar } from 'langou/nav';
 import { alert } from 'langou/dialog';
@@ -66,7 +65,7 @@ class IndexNavbar extends Navbar {
 	m_handle_menu_item(e) {
 		if (e.data == 0) {
 			// alert('添加钱包');
-			setTimeout(e=>this.collection.push(<AddWallets />, 1), 1);
+			this.collection.push(<AddWallets />, 1);
 		} else if (e.data == 1) {
 			alert('扫一扫');
 		} else if (e.data == 2) {

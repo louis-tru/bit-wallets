@@ -30,8 +30,8 @@
 
 import { Div, Image, Indep, Input, CSS } from 'langou';
 import { NavPage } from 'langou/nav';
-import { alert, confirm } from 'langou/dialog';
-import { NavBtn2, Btn } from '../btns';
+import { alert, sheet } from 'langou/dialog';
+import { NavBtn, Btn } from '../btns';
 
 const {resolve} = require;
 
@@ -107,25 +107,29 @@ export default class AddWallets extends NavPage {
 	m_handle_click(e) {
 		var id = e.sender.id;
 		if (id == 'btc') {
-			// confirm('是否要创建钱包BTC', (e)=>{
-			// 	if (e) {
-					setTimeout(e=>this.collection.push(<Create type="BTC" title="创建 BTC 钱包" />, 1), 1);
-			// 	}
-			// });
+			sheet(['导入','创建'], (e)=>{
+				if (e == 2) {
+					this.collection.push(<Create type="BTC" title="创建 BTC 钱包" />, 1);
+				} else if (e == 1) {
+					alert('导入');
+				}
+			});
 		} else if (id == 'eth') {
-			// confirm('是否要创建钱包ETH', (e)=>{
-			// 	if (e) {
-					setTimeout(e=>this.collection.push(<Create type="ETH" title="创建 ETHEREUM 钱包" />, 1), 1);
-			// 	}
-			// });
+			sheet(['导入','创建'], (e)=>{
+				if (e == 2) { // 创建
+					this.collection.push(<Create type="ETH" title="创建 ETHEREUM 钱包" />, 1);
+				} else if (e == 1) { // 导入
+					alert('导入');
+				}
+			});
 		}
 	}
 
 	render() {
 		return super.render(
 			<Div class="index">
-				<NavBtn2 id="btc" icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
-				<NavBtn2 id="eth" icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH" />
+				<NavBtn id="btc" icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
+				<NavBtn id="eth" icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH" />
 			</Div>
 		);
 	}

@@ -34,7 +34,7 @@ import 'langou/reader';
 import { GUIApplication, Root } from 'langou';
 import { NavPageCollection } from 'langou/nav';
 import Index from './pages/index';
-// import './cn';
+import './cn';
 
 new GUIApplication({
 	multisample: 4,
