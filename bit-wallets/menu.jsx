@@ -28,7 +28,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {Div, CSS, atomPixel as px, ViewController, Button, Text, Hybrid} from 'langou';
+import {CSS, atomPixel, Button, Text, Hybrid} from 'langou';
 import { Overlay } from 'langou/overlay';
 
 CSS({
@@ -38,7 +38,7 @@ CSS({
 		textLineHeight: 45,
 		textAlign: "left",
 		borderRadius: 0,
-		borderBottom: `${px} #c8c7cc`,
+		borderBottom: `${atomPixel} #c8c7cc`,
 		textColor: "#0079ff",
 	},
 	

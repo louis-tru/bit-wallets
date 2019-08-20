@@ -29,107 +29,44 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { Div, Image, Indep, Input, CSS } from 'langou';
-import { NavPage } from 'langou/nav';
+import { NavPage, Toolbar } from 'langou/nav';
 import { alert, sheet } from 'langou/dialog';
 import { NavBtn, Btn } from '../btns';
+import Create from './wallet_create';
+import Import from './wallet_import';
 
 const {resolve} = require;
 
-CSS({
-	'.create': {
-		width: '100%',
-		height: '100%',
-	},
-	'.create .img': {
-		width: 60,
-		height: 60,
-		backgroundColor: '#f00',
-		margin: '40 auto 30 auto',
-	},
-	'.create .input': {
-		width: 'full',
-		height: 38,
-		margin: '10 20 0 20',
-		backgroundColor: '#f4f4f4',
-		borderRadius: 5,
-		textSize: 14,
-	},
-	'.create .btns': {
-		width: '20!',
-		alignY: 'bottom',
-		alignX: 'left',
-		x: 10,
-		y: -10,
-	},
-});
-
 /**
- * @class Create
-*/
-class Create extends NavPage {
-	constructor() {
-		super();
-		this.title = '添加XXX钱包';
-		this.toolbar.hidden = true;
-	}
-	render() {
-		return super.render(
-			<Div class="create">
-				<Image class="img" src=(resolve(`../img/${this.type}-60.png`)) />
-				<Input class="input" textMargin=15 placeholder="钱包名称" />
-				<Input class="input" textMargin=15 security=1 placeholder="钱包密码" />
-				<Input class="input" textMargin=15 security=1 placeholder="重复输入密码" />
-				<Input class="input" textMargin=15 placeholder="密码提示信息" />
-				<Indep class="btns">
-					<Btn onClick="m_handle_click">创建</Btn>
-				</Indep>
-			</Div>
-		);
-	}
-	m_handle_click() {
-		alert('创建');
-	}
-}
-
-Create.defineProps(['type']);
-
-/**
- * @class AddWallets
+ * @class WalletAdds
  */
-export default class AddWallets extends NavPage {
+export default class WalletAdds extends NavPage {
 
 	constructor() {
 		super();
 		this.title = '添加钱包';
 		this.toolbar.hidden = true;
 	}
+	
 
 	m_handle_click(e) {
-		var id = e.sender.id;
-		if (id == 'btc') {
-			sheet(['导入','创建'], (e)=>{
-				if (e == 2) {
-					this.collection.push(<Create type="BTC" title="创建 BTC 钱包" />, 1);
-				} else if (e == 1) {
-					alert('导入');
-				}
-			});
-		} else if (id == 'eth') {
-			sheet(['导入','创建'], (e)=>{
-				if (e == 2) { // 创建
-					this.collection.push(<Create type="ETH" title="创建 ETHEREUM 钱包" />, 1);
-				} else if (e == 1) { // 导入
-					alert('导入');
-				}
-			});
-		}
+		var type = e.sender.id;
+		sheet(['导入','创建'], (index)=>{
+			if (index == 2) {
+				this.collection.push(<Create type=type title=`创建 ${type} 钱包` />, 1);
+			} else if (index == 1) {
+				this.collection.push(<Import type=type title=`导入 ${type} 钱包` />, 1);
+			}
+		});
 	}
 
 	render() {
 		return super.render(
 			<Div class="index">
-				<NavBtn id="btc" icon=(resolve('../img/BTC-60.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
-				<NavBtn id="eth" icon=(resolve('../img/ETH-60.png')) onClick="m_handle_click" text="ETH" />
+				<NavBtn id="BTC" icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
+				<NavBtn id="ETH" icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH" />
+				<NavBtn id="EOS" icon=(resolve('../img/EOS-128.png')) onClick="m_handle_click" text="EOS" />
+				<NavBtn id="DOT" icon=(resolve('../img/DOT-128.png')) onClick="m_handle_click" text="DOT" />
 			</Div>
 		);
 	}

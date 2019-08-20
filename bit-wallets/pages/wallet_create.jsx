@@ -28,27 +28,67 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { 
-	Scroll, ViewController
-} from 'langou';
-import { BtnItem } from '../btns';
+import { Div, Image, Indep, Input, CSS } from 'langou';
+import { NavPage } from 'langou/nav';
+import { alert } from 'langou/dialog';
+import { Btn } from '../btns';
 
 const {resolve} = require;
 
-export default class IndexWallet extends ViewController {
+CSS({
+	'.wcreate': {
+		width: '100%',
+		height: '100%',
+	},
+	'.wcreate .img': {
+		width: 60,
+		height: 60,
+		backgroundColor: '#f00',
+		margin: '40 auto 30 auto',
+	},
+	'.wcreate .input': {
+		width: 'full',
+		height: 38,
+		margin: '10 20 0 20',
+		backgroundColor: '#f4f4f4',
+		borderRadius: 5,
+		textSize: 14,
+	},
+	'.wcreate .btns': {
+		width: '20!',
+		alignY: 'bottom',
+		alignX: 'left',
+		x: 10,
+		y: -10,
+	},
+});
 
-	title = '钱包';
-
-	m_handle_click(e) {
-		// this.collection.push(<Index toolbar.hidden=true />, 1);
+/**
+ * @class Create
+*/
+export default class Create extends NavPage {
+	constructor() {
+		super();
+		this.title = '添加XXX钱包';
+		this.toolbar.hidden = true;
 	}
-
 	render() {
-		return (
-			<Scroll class="index">
-				<BtnItem icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
-				<BtnItem icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
-			</Scroll>
+		return super.render(
+			<Div class="wcreate">
+				<Image class="img" src=(resolve(`../img/${this.type}-128.png`)) />
+				<Input class="input" textMargin=15 placeholder="钱包名称" />
+				<Input class="input" textMargin=15 security=1 placeholder="钱包密码" />
+				<Input class="input" textMargin=15 security=1 placeholder="重复输入密码" />
+				<Input class="input" textMargin=15 placeholder="密码提示信息" />
+				<Indep class="btns">
+					<Btn onClick="m_handle_click">创建</Btn>
+				</Indep>
+			</Div>
 		);
 	}
+	m_handle_click() {
+		alert('创建');
+	}
 }
+
+Create.defineProps(['type']);

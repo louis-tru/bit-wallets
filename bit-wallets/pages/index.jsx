@@ -37,7 +37,7 @@ import Menu from '../menu';
 import IndexWallet from './index_wallet';
 import IndexPrice from './index_price';
 import IndexMy from './index_my';
-import AddWallets from './add_wallets';
+import WalletAdds from './wallet_adds';
 
 CSS({
 	'.index': {
@@ -65,7 +65,7 @@ class IndexNavbar extends Navbar {
 	m_handle_menu_item(e) {
 		if (e.data == 0) {
 			// alert('添加钱包');
-			this.collection.push(<AddWallets />, 1);
+			this.collection.push(<WalletAdds />, 1);
 		} else if (e.data == 1) {
 			alert('扫一扫');
 		} else if (e.data == 2) {

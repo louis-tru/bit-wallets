@@ -28,27 +28,38 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { 
-	Scroll, ViewController
-} from 'langou';
-import { BtnItem } from '../btns';
+import { Div, CSS } from 'langou';
+import { NavPage, Toolbar } from 'langou/nav';
 
 const {resolve} = require;
 
-export default class IndexWallet extends ViewController {
+CSS({
+	'.wimport': {
+	},
+});
 
-	title = '钱包';
-
-	m_handle_click(e) {
-		// this.collection.push(<Index toolbar.hidden=true />, 1);
-	}
-
-	render() {
-		return (
-			<Scroll class="index">
-				<BtnItem icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
-				<BtnItem icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
-			</Scroll>
+/**
+ * @class Import
+*/
+export default class Import extends NavPage {
+	constructor() {
+		super();
+		this.toolbar = (
+			<Toolbar>
+				AAAA
+			</Toolbar>
 		);
 	}
+	render() {
+		return super.render(
+			<Div class="wimport">
+				
+			</Div>
+		);
+	}
+	m_handle_click() {
+		// alert('导入');
+	}
 }
+
+Import.defineProps(['type']);
