@@ -30,6 +30,7 @@
 
 import { Div, CSS } from 'langou';
 import { NavPage, Toolbar } from 'langou/nav';
+import Tabs, {TabPanel} from '../tabs';
 
 const {resolve} = require;
 
@@ -46,15 +47,16 @@ export default class Import extends NavPage {
 		super();
 		this.toolbar = (
 			<Toolbar>
-				AAAA
 			</Toolbar>
 		);
 	}
 	render() {
 		return super.render(
-			<Div class="wimport">
-				
-			</Div>
+			<Tabs>
+				<TabPanel title="Keystore">Keystore</TabPanel>
+				<TabPanel title="助记词">助记词</TabPanel>
+				<TabPanel title="私钥">私钥</TabPanel>
+			</Tabs>
 		);
 	}
 	m_handle_click() {

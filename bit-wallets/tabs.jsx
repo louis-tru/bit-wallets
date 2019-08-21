@@ -1,0 +1,127 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Distributed under the BSD license:
+ *
+ * Copyright (c) 2019, xuewen.chu
+ * All rights reserved.
+ * 
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of xuewen.chu nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL xuewen.chu BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * ***** END LICENSE BLOCK ***** */
+
+import 'langou/util';
+import { ViewController, Div, Indep, Button, CSS, atomPixel as px } from 'langou';
+
+CSS({
+	'.tabs': {
+		width: '100%',
+		height: '100%',
+	},
+	'.tabs .btns': {
+		width: '100%',
+		height: 40,
+		contentAlign: 'top',
+		borderBottom: `${px} #bbb`,
+	},
+	'.tabs .btns .btn': {
+		textSize: 12,
+		textLineHeight: 40,
+		textColor: '#444',
+	},
+	'.tabs .btns .border': {
+		height: '5%',
+		backgroundColor: '#0079ff',
+		alignY: "bottom",
+		y: px,
+	},
+	'.tabs .btns .btn.on': {
+		textColor: '#0079ff',
+	},
+	'.tabs .panels': {
+		height: '30!',
+		contentAlign: 'top',
+	},
+	'.tabs .panel': {
+		width: '100%',
+		height: '100%',
+	},
+});
+
+/**
+ * @class Tabs
+ */
+export default class Tabs extends ViewController {
+
+	m_handle_click(e) {
+		this.tab = e.sender.index;
+	}
+
+	triggerUpdate(e) {
+		this.IDs.border.transition({ x: 1 / this.m_tabs * this.tab * this.dom.finalWidth, time: 200 });
+		this.IDs.panels.transition({ x: -this.dom.finalWidth * this.tab, time: 200 });
+		super.triggerUpdate(e);
+	}
+
+	render(...vdoms) {
+		var tabs = this.m_tabs = vdoms.length;
+		var width = 1 / tabs * 100 + '%';
+		var tab = this.tab;
+		return (
+			<Div class="tabs">
+				<Div class="btns">
+					{
+						vdoms.map((vdom,j)=>{
+							util.assert(ViewController.typeOf(vdom, TabPanel) == 2, 'Type error');
+							return (
+								<Button
+									index=j
+									class=`btn ${tab==j?'on':''}`
+									width=width onClick="m_handle_click"
+								>{vdom.getProp('title')}</Button>
+							);
+						})
+					}
+					<Indep class="border" id="border" width=width />
+				</Div>
+				<Div class="panels" id="panels" width=`${tabs}00%`>
+					{vdoms.map(e=>(<Div width=width height="100%">{e}</Div>))}
+				</Div>
+			</Div>
+		);
+	}
+}
+
+Tabs.defineProps({tab:0});
+
+/**
+ * @class TabPanel
+ */
+export class TabPanel extends ViewController {
+
+	render(...vdoms) {
+		return (
+			<Div class="panel">
+				{vdoms}
+			</Div>
+		);
+	}
+}

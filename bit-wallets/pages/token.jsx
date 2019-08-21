@@ -27,3 +27,26 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  * ***** END LICENSE BLOCK ***** */
+
+import { Div,CSS } from 'langou';
+import { NavPage } from 'langou/nav';
+
+const {resolve} = require;
+
+CSS({
+	'.token': {
+		// TODO ...
+	},
+});
+
+/** 
+ * @class Token
+*/
+export default class Token extends NavPage {
+	
+	render() {
+		return super.render(
+			<Div></Div>
+		);
+	}
+}

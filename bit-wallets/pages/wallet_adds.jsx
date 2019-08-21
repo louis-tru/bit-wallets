@@ -28,10 +28,10 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Image, Indep, Input, CSS } from 'langou';
-import { NavPage, Toolbar } from 'langou/nav';
-import { alert, sheet } from 'langou/dialog';
-import { NavBtn, Btn } from '../btns';
+import { Div } from 'langou';
+import { NavPage } from 'langou/nav';
+import { sheet } from 'langou/dialog';
+import { NavBtn } from '../btns';
 import Create from './wallet_create';
 import Import from './wallet_import';
 
