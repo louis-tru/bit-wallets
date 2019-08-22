@@ -28,7 +28,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, CSS } from 'langou';
+import { CSS, Hybrid, Button } from 'langou';
 import { NavPage, Toolbar } from 'langou/nav';
 import Tabs, {TabPanel} from '../tabs';
 
@@ -47,6 +47,9 @@ export default class Import extends NavPage {
 		super();
 		this.toolbar = (
 			<Toolbar>
+				<Hybrid textAlign="center" width="100%" height="100%">
+					<Button height=20 margin=8 textSize=14>了解Keystore</Button>
+				</Hybrid>
 			</Toolbar>
 		);
 	}

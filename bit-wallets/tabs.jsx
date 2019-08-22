@@ -29,7 +29,10 @@
  * ***** END LICENSE BLOCK ***** */
 
 import 'langou/util';
-import { ViewController, Div, Indep, Button, CSS, atomPixel as px } from 'langou';
+import { 
+	ViewController, Div, Clip, Indep, 
+	Button, CSS, atomPixel as px, nextFrame,
+} from 'langou';
 
 CSS({
 	'.tabs': {
@@ -76,8 +79,11 @@ export default class Tabs extends ViewController {
 	}
 
 	triggerUpdate(e) {
-		this.IDs.border.transition({ x: 1 / this.m_tabs * this.tab * this.dom.finalWidth, time: 200 });
-		this.IDs.panels.transition({ x: -this.dom.finalWidth * this.tab, time: 200 });
+		nextFrame(e=>{
+			var width = this.dom.finalWidth;
+			this.IDs.border.transition({ x: 1 / this.m_tabs * this.tab * width, time: 200 });
+			this.IDs.panels.transition({ x: -width * this.tab, time: 200 });
+		});
 		super.triggerUpdate(e);
 	}
 
@@ -86,7 +92,7 @@ export default class Tabs extends ViewController {
 		var width = 1 / tabs * 100 + '%';
 		var tab = this.tab;
 		return (
-			<Div class="tabs">
+			<Clip class="tabs">
 				<Div class="btns">
 					{
 						vdoms.map((vdom,j)=>{
@@ -105,7 +111,7 @@ export default class Tabs extends ViewController {
 				<Div class="panels" id="panels" width=`${tabs}00%`>
 					{vdoms.map(e=>(<Div width=width height="100%">{e}</Div>))}
 				</Div>
-			</Div>
+			</Clip>
 		);
 	}
 }
@@ -125,3 +131,5 @@ export class TabPanel extends ViewController {
 		);
 	}
 }
+
+TabPanel.defineProps({title:''});
