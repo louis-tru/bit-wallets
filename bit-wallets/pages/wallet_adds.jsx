@@ -48,14 +48,14 @@ export default class WalletAdds extends NavPage {
 		this.toolbar.hidden = true;
 	}
 	
-
 	m_handle_click(e) {
 		var type = e.sender.id;
-		sheet(['导入','创建'], (index)=>{
-			if (index == 2) {
+		sheet(['创建','导入',`了解${type}`], (index)=>{
+			if (index == 1) {
 				this.collection.push(<Create type=type title=`创建 ${type} 钱包` />, 1);
-			} else if (index == 1) {
+			} else if (index == 2) {
 				this.collection.push(<Import type=type title=`导入 ${type} 钱包` />, 1);
+			} else if (index == 3) {
 			}
 		});
 	}

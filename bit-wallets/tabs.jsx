@@ -76,6 +76,7 @@ export default class Tabs extends ViewController {
 
 	m_handle_click(e) {
 		this.tab = e.sender.index;
+		this.triggerSwitch(this.tab);
 	}
 
 	triggerUpdate(e) {
@@ -114,6 +115,8 @@ export default class Tabs extends ViewController {
 			</Clip>
 		);
 	}
+
+	event onSwitch;
 }
 
 Tabs.defineProps({tab:0});

@@ -28,7 +28,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Hybrid, Button } from 'langou';
+import { CSS, Hybrid, Button, TextNode, Div } from 'langou';
 import { NavPage, Toolbar } from 'langou/nav';
 import Tabs, {TabPanel} from '../tabs';
 
@@ -48,14 +48,20 @@ export default class Import extends NavPage {
 		this.toolbar = (
 			<Toolbar>
 				<Hybrid textAlign="center" width="100%" height="100%">
-					<Button height=20 margin=8 textSize=14>了解Keystore</Button>
+					<Button
+						height=22 
+						margin="auto"
+						textSize=14 
+						textColor="#0079ff"
+						onClick=(e=>this.m_handle_click_1()) 
+					><TextNode id="txt" value="了解Keystore" /></Button>
 				</Hybrid>
 			</Toolbar>
 		);
 	}
 	render() {
 		return super.render(
-			<Tabs>
+			<Tabs onSwitch="m_handle_switch">
 				<TabPanel title="Keystore">Keystore</TabPanel>
 				<TabPanel title="助记词">助记词</TabPanel>
 				<TabPanel title="私钥">私钥</TabPanel>
@@ -64,6 +70,12 @@ export default class Import extends NavPage {
 	}
 	m_handle_click() {
 		// alert('导入');
+	}
+	m_handle_click_1() {
+		// alert('导入');
+	}
+	m_handle_switch(e) {
+		this.toolbar.IDs.txt.value = ['了解Keystore','了解助记词','了解私钥'][e.data];
 	}
 }
 
