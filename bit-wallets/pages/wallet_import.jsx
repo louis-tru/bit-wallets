@@ -274,11 +274,11 @@ export default class Import extends NavPage {
 	m_handle_click_1() {
 		var tab = this.IDs.tabs.tab;
 		if (tab == 0) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-keystore');
+			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-keystore?locale=zh-CN');
 		} else if (tab == 1) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-mnemonic');
+			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-mnemonic?locale=zh-CN');
 		} else if (tab == 2) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-privatekey');
+			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-privatekey?locale=zh-CN');
 		}
 	}
 	m_handle_switch(e) {
