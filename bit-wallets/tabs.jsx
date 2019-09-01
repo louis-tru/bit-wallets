@@ -41,13 +41,13 @@ CSS({
 	},
 	'.tabs .btns': {
 		width: '100%',
-		height: 40,
+		height: 45,
 		contentAlign: 'top',
 		borderBottom: `${px} #bbb`,
 	},
 	'.tabs .btns .btn': {
 		textSize: 12,
-		textLineHeight: 40,
+		textLineHeight: 45,
 		textColor: '#444',
 	},
 	'.tabs .btns .border': {
@@ -60,7 +60,7 @@ CSS({
 		textColor: '#0079ff',
 	},
 	'.tabs .panels': {
-		height: '30!',
+		height: '45!',
 		contentAlign: 'top',
 	},
 	'.tabs .panel': {
