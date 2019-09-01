@@ -6,6 +6,8 @@
   "version": "1.0.0",
   "langouSyntax": true,
 	"dependencies": {
+  },
+	"_dependencies": {
 		"langoukit": "~0.8.51",
     "safe-tx": "~0.1.12",
     "crypto-tx": "~0.1.20"
