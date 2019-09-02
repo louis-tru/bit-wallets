@@ -150,6 +150,7 @@ class Keystore extends TabPanel {
 	}
 	m_handle_click2() {
 		// TODO ...
+		alert('导入');
 	}
 }
 
@@ -191,13 +192,14 @@ class Auxiliaries extends TabPanel {
 	}
 	m_handle_click2() {
 		// TODO ...
+		alert('导入');
 	}
 	m_handle_click3() {
 		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
 	}
 }
 
-//私钥
+// 私钥
 class PrivateKey extends TabPanel {
 	render() {
 		return super.render(
@@ -235,6 +237,7 @@ class PrivateKey extends TabPanel {
 	}
 	m_handle_click2() {
 		// TODO ...
+		alert('导入');
 	}
 	m_handle_click3() {
 		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
