@@ -28,7 +28,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div } from 'langou';
+import { Div, langou } from 'langou';
 import { NavPage } from 'langou/nav';
 import { sheet } from 'langou/dialog';
 import { NavBtn } from '../btns';
@@ -56,6 +56,13 @@ export default class WalletAdds extends NavPage {
 			} else if (index == 2) {
 				this.collection.push(<Import type=type title=`导入 ${type} 钱包` />, 1);
 			} else if (index == 3) {
+				var tokens = {
+					BTC: 'bitcoin',
+					ETH: 'ethereum',
+					EOS: 'eos',
+					DOT: 'polkadot',
+				};
+				langou.app.openUrl(`https://token-profile.token.im/token/${tokens[type]}?locale=zh-CN`);
 			}
 		});
 	}

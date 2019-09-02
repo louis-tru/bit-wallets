@@ -39,7 +39,7 @@ import './cn';
 new GUIApplication({
 	multisample: 4,
 	width: 375,
-	height: 800,
+	height: 700,
 	fullScreen: util.options.full_screen || 0,
 	enableTouch: 1,
 	background: 0xffffff,

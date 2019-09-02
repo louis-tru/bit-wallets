@@ -34,6 +34,7 @@ import { CSS, Hybrid, Button,
 	Textarea, Input, langou,
 } from 'langou';
 import { NavPage, Toolbar } from 'langou/nav';
+import { alert } from 'langou/dialog';
 import Tabs, {TabPanel} from '../tabs';
 import { Btn } from '../btns';
 
@@ -45,7 +46,7 @@ CSS({
 		width: "100%",
 		// height: 80,
 		backgroundColor: "#fafbfd",
-		borderBottom: `${px} #efeff1`,
+		borderBottom: `${px} #d2d2d2`,
 	},
 	'.wi .desc .txt': {
 		margin:20,
@@ -60,13 +61,13 @@ CSS({
 	},
 	'.wi .box1 .div': {
 		margin: 20,
-		marginBottom: 10,
+		marginBottom: 5,
 		width:"full",
-		border: `${px} #efeff1`,
-		borderRadius: 6,
+		border: `${px} #e0e0e0`,
+		borderRadius: 4,
 	},
 	'.wi .box1 .in1': {
-		margin: 5,
+		margin: '5 0',
 		width: "full",
 		textSize: 14,
 		textColor: '#333',
@@ -76,7 +77,7 @@ CSS({
 		width: "full",
 		height: 45,
 		margin: '0 20',
-		borderBottom: `${px} #efeff1`,
+		borderBottom: `${px} #e0e0e0`,
 		// backgroundColor: '#f00',
 	},
 	'.wi .box1 .in2': {
@@ -121,6 +122,7 @@ CSS({
 	},
 });
 
+// Keystore
 class Keystore extends TabPanel {
 	render() {
 		return super.render(
@@ -191,7 +193,7 @@ class Auxiliaries extends TabPanel {
 		// TODO ...
 	}
 	m_handle_click3() {
-		// TODO ...
+		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
 	}
 }
 
@@ -235,13 +237,13 @@ class PrivateKey extends TabPanel {
 		// TODO ...
 	}
 	m_handle_click3() {
-		// TODO ...
+		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
 	}
 }
 
 /**
  * @class Import
-*/
+ */
 export default class Import extends NavPage {
 	constructor() {
 		super();
