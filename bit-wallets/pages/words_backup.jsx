@@ -28,52 +28,26 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, langou } from 'langou';
-import { NavPage } from 'langou/nav';
-import { sheet } from 'langou/dialog';
-import { NavBtn } from '../btns';
-import Create from './wallet_create';
-import Import from './wallet_import';
-
-const {resolve} = require;
+import {
+	Div
+} from 'langou';
+import {NavPage} from 'langou/nav';
 
 /**
- * @class WalletAdds
+ * @class WordsBackup
  */
-export default class WalletAdds extends NavPage {
+export default class WordsBackup extends NavPage {
 
 	constructor() {
 		super();
-		this.title = '添加钱包';
+		this.title = '备份助记词';
 		this.toolbar.hidden = true;
-	}
-	
-	m_handle_click(e) {
-		var type = e.sender.id;
-		sheet(['创建','导入',`了解${type}`], (index)=>{
-			if (index == 1) {
-				this.collection.push(<Create type=type title=`创建${type}钱包` />, 1);
-			} else if (index == 2) {
-				this.collection.push(<Import type=type title=`导入${type}钱包` />, 1);
-			} else if (index == 3) {
-				var tokens = {
-					BTC: 'bitcoin',
-					ETH: 'ethereum',
-					EOS: 'eos',
-					DOT: 'polkadot',
-				};
-				langou.app.openUrl(`https://token-profile.token.im/token/${tokens[type]}?locale=zh-CN`);
-			}
-		});
 	}
 
 	render() {
 		return super.render(
-			<Div class="index">
-				<NavBtn id="BTC" icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
-				<NavBtn id="ETH" icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH" />
-				<NavBtn id="EOS" icon=(resolve('../img/EOS-128.png')) onClick="m_handle_click" text="EOS" />
-				<NavBtn id="DOT" icon=(resolve('../img/DOT-128.png')) onClick="m_handle_click" text="DOT" />
+			<Div>
+				WordsBackup
 			</Div>
 		);
 	}

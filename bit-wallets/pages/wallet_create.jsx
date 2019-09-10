@@ -32,6 +32,7 @@ import { Div, Image, Indep, Input, CSS } from 'langou';
 import { NavPage } from 'langou/nav';
 import { alert } from 'langou/dialog';
 import { Btn } from '../btns';
+import WordsBackup from './words_backup';
 
 const {resolve} = require;
 
@@ -87,7 +88,7 @@ export default class Create extends NavPage {
 		);
 	}
 	m_handle_click() {
-		alert('创建');
+		this.collection.push(<WordsBackup />, 1);
 	}
 }
 
