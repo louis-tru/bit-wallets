@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	Div
+	Div, Text
 } from 'langou';
 import {NavPage} from 'langou/nav';
 
@@ -46,8 +46,8 @@ export default class WordsBackup extends NavPage {
 
 	render() {
 		return super.render(
-			<Div>
-				WordsBackup
+			<Div backgroundColor="#f00">
+				<Text value="WordsBackup" />
 			</Div>
 		);
 	}
