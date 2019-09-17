@@ -1,7 +1,7 @@
 BIT Wallets
 ===============
 
-This is a digital wallet based on [`langou`]
+This is a digital wallet based on [`ngui`]
 
 
-[`langou`]: https://github.com/louis-tru/langou
+[`ngui`]: https://github.com/louis-tru/ngui

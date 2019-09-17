@@ -1,10 +1,10 @@
 {
 	"name": "bit-wallets",
 	"appName": "BITWallets",
-	"id": "org.langou.bit-wallets",
+	"id": "org.ngui.bit-wallets",
 	"main": "main.jsx",
 	"version": "1.0.0",
-	"langouSyntax": true,
+	"nguiSyntax": true,
 	"dependencies": {
 	},
 	"_dependencies": {

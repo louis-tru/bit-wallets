@@ -30,7 +30,7 @@
 
 import { 
 	Scroll, ViewController
-} from 'langou';
+} from 'ngui';
 import { BtnItem } from '../btns';
 
 const {resolve} = require;

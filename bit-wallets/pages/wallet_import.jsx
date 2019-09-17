@@ -31,10 +31,10 @@
 import { CSS, Hybrid, Button, 
 	TextNode, Text, Div, 
 	atomPixel as px,
-	Textarea, Input, langou,
-} from 'langou';
-import { NavPage, Toolbar } from 'langou/nav';
-import { alert } from 'langou/dialog';
+	Textarea, Input, ngui,
+} from 'ngui';
+import { NavPage, Toolbar } from 'ngui/nav';
+import { alert } from 'ngui/dialog';
 import Tabs, {TabPanel} from '../tabs';
 import { Btn } from '../btns';
 
@@ -279,11 +279,11 @@ export default class Import extends NavPage {
 	m_handle_click_1() {
 		var tab = this.IDs.tabs.tab;
 		if (tab == 0) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-keystore?locale=zh-CN');
+			ngui.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-keystore?locale=zh-CN');
 		} else if (tab == 1) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-mnemonic?locale=zh-CN');
+			ngui.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-mnemonic?locale=zh-CN');
 		} else if (tab == 2) {
-			langou.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-privatekey?locale=zh-CN');
+			ngui.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-privatekey?locale=zh-CN');
 		}
 	}
 	m_handle_switch(e) {

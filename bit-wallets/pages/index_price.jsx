@@ -30,7 +30,7 @@
 
 import { 
 	Div, Hybrid, CSS, ViewController
-} from 'langou';
+} from 'ngui';
 
 CSS({
 

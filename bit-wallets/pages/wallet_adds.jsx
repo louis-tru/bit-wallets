@@ -28,9 +28,9 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, langou } from 'langou';
-import { NavPage } from 'langou/nav';
-import { sheet } from 'langou/dialog';
+import { Div, ngui } from 'ngui';
+import { NavPage } from 'ngui/nav';
+import { sheet } from 'ngui/dialog';
 import { NavBtn } from '../btns';
 import Create from './wallet_create';
 import Import from './wallet_import';
@@ -62,7 +62,7 @@ export default class WalletAdds extends NavPage {
 					EOS: 'eos',
 					DOT: 'polkadot',
 				};
-				langou.app.openUrl(`https://token-profile.token.im/token/${tokens[type]}?locale=zh-CN`);
+				ngui.app.openUrl(`https://token-profile.token.im/token/${tokens[type]}?locale=zh-CN`);
 			}
 		});
 	}

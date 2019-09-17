@@ -30,9 +30,9 @@
 
 import { 
 	Indep,Button,Hybrid,Div,render, CSS, TextNode,
-} from 'langou';
-import { NavPage, Toolbar, Navbar } from 'langou/nav';
-import { alert } from 'langou/dialog';
+} from 'ngui';
+import { NavPage, Toolbar, Navbar } from 'ngui/nav';
+import { alert } from 'ngui/dialog';
 import Menu from '../menu';
 import IndexWallet from './index_wallet';
 import IndexPrice from './index_price';

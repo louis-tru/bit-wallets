@@ -28,7 +28,7 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {CONSTS} from 'langou/dialog';
+import {CONSTS} from 'ngui/dialog';
 
 Object.assign(CONSTS, {
 	OK: '确认',

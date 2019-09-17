@@ -28,8 +28,8 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div,CSS } from 'langou';
-import { NavPage } from 'langou/nav';
+import { Div,CSS } from 'ngui';
+import { NavPage } from 'ngui/nav';
 
 const {resolve} = require;
 

@@ -31,7 +31,7 @@
 import { 
 	Hybrid,Div, CSS, Image, Indep, Button,
 	atomPixel as px, TextNode, Text, ViewController
-} from 'langou';
+} from 'ngui';
 
 CSS({
 	'.iwitem': {

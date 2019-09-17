@@ -30,8 +30,8 @@
 
 import {
 	Div, Text
-} from 'langou';
-import {NavPage} from 'langou/nav';
+} from 'ngui';
+import {NavPage} from 'ngui/nav';
 
 /**
  * @class WordsBackup

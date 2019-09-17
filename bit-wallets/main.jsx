@@ -28,11 +28,11 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
-import 'langou/font';
-import 'langou/reader';
-import { GUIApplication, Root } from 'langou';
-import { NavPageCollection } from 'langou/nav';
+import 'ngui/util';
+import 'ngui/font';
+import 'ngui/reader';
+import { GUIApplication, Root } from 'ngui';
+import { NavPageCollection } from 'ngui/nav';
 import Index from './pages/index';
 import './cn';
 

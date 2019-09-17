@@ -28,8 +28,8 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {CSS, atomPixel, Button, Text, Hybrid} from 'langou';
-import { Overlay } from 'langou/overlay';
+import {CSS, atomPixel, Button, Text, Hybrid} from 'ngui';
+import { Overlay } from 'ngui/overlay';
 
 CSS({
 

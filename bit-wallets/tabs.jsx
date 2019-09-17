@@ -28,11 +28,11 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'langou/util';
+import 'ngui/util';
 import { 
 	ViewController, Div, Clip, Indep, 
 	Button, CSS, atomPixel as px, nextFrame,
-} from 'langou';
+} from 'ngui';
 
 CSS({
 	'.tabs': {

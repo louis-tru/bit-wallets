@@ -28,9 +28,9 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Image, Indep, Input, CSS } from 'langou';
-import { NavPage } from 'langou/nav';
-import { alert } from 'langou/dialog';
+import { Div, Image, Indep, Input, CSS } from 'ngui';
+import { NavPage } from 'ngui/nav';
+import { alert } from 'ngui/dialog';
 import { Btn } from '../btns';
 import WordsBackup from './words_backup';
 
