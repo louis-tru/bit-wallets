@@ -28,38 +28,87 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
-import 'ngui/font';
-import 'ngui/reader';
-import { GUIApplication, Root } from 'ngui';
-import { NavPageCollection } from 'ngui/nav';
-import Index from './pages/index';
-import './cn';
-import './common';
+import {
+	ViewController, CSS, ngui,
+	Hybrid as hybrid, 
+	Indep as indep,
+	Image as img, 
+	Div as div,
+	Text as text,
+	render,
+} from 'ngui';
+import * as utils from 'ngui/util';
 
-import MnemonicWord from './pages/mnemonic_word';
-import WalletSettings from './pages/wallet_settings';
-import BackupTip from './pages/backup_tip';
-import ExportKeystore from './pages/export_keystore';
+var {resolve} = require;
 
-new GUIApplication({
-	multisample: 4,
-	width: 375,
-	height: 700,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			<ExportKeystore />
-			{/* <BackupTip /> */}
-			{/* <WalletSettings /> */}
-			{/* <MnemonicWord /> */}
-			{/* <Index /> */}
-		</NavPageCollection>
-	</Root>
-);
+CSS({
+	'.tip': {
+		width: '100%',
+		height: '100%',
+	},
+	'.tip .box0': {
+		align: 'center center',
+	},
+	'.tip .box1': {
+		height: 115,
+		backgroundColor: '#f7f7f7',
+		margin: 'auto',
+		borderRadius: 15,
+		textAlign: 'center',
+	},
+	'.tip .icon': {
+		width: 40,
+		height: 40,
+		margin: '22.3 35 9 35',
+		// backgroundColor: '#f00',
+	},
+	'.tip .txt1': {
+		textLineHeight: 26,
+		textAlign: 'center',
+		textSize: 14,
+		textColor: '#000',
+		margin: '0 7',
+	},
+});
 
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+var ICONS = {
+	ok: resolve('./img/icon-ok.png'),
+	fail: resolve('./img/icon-fail.png'),
+};
+
+/**
+ * @class Tip
+ * @extends ViewController
+ */
+export default class Tip extends ViewController {
+
+	render() {
+		return (
+			<indep class="tip" receive=1 opacity=0>
+				<indep class="box0">
+					<hybrid class="box1">
+						<img class="icon" src=ICONS[this.icon] />\n
+						<text class="txt1" value=this.value />
+					</hybrid>
+				</indep>
+			</indep>
+		);
+	}
+
+	show() {
+		var r = ngui.root;
+		utils.assert(r, 'not find root view');
+		this.appendTo(r);
+		this.dom.transition({opacity:1,time:500});
+		utils.sleep(3e3).then(e=>{
+			this.dom.transition({opacity:0,time:500}, e=>this.remove());
+		});
+		return this;
+	}
+}
+
+Tip.defineProps({icon: 'ok', value: 'tip'});
+
+export function showTip(tip = 'tip', icon = 'ok') {
+	return render(<Tip value=tip icon=icon />).show();
+}

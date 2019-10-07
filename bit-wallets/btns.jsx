@@ -38,6 +38,12 @@ CSS({
 		width: '100%',
 		height: 60,
 	},
+	'.iwitem.small': {
+		height: 52,
+	},
+	'.iwitem.big': {
+		height: 70,
+	},
 	'.iwitem:normal': {
 		backgroundColor: '#fff0', time: 50
 	},
@@ -49,13 +55,13 @@ CSS({
 	},
 	'.iwitem .img': {
 		width: 30,
-		margin: 'auto 10',
+		margin: 'auto 15',
 	},
 	'.iwitem .con': {
-		width: '50!',
+		width: '60!',
 		height: 'full',
 		contentAlign: 'right',
-		borderBottom: `${px} #BBBBBB`,
+		borderBottom: `${px} #e7e8ea`,
 	},
 	'.iwitem .con .left': {
 		width: '125!',
@@ -74,6 +80,9 @@ CSS({
 		textSize: 12,
 		textColor: '#888',
 	},
+	'.iwitem.small .con .left .txt': {
+		textSize: 14,
+	},
 	'.iwitem .con .right': {
 		width: 100,
 		height: 40,
@@ -84,9 +93,35 @@ CSS({
 });
 
 /**
- * @class BtnItem
+ * @class NavBtn
  */
-export class BtnItem extends ViewController {
+export class NavBtn extends ViewController {
+	event onClick;
+	render() {
+		return (
+			<Div class=`iwitem ${this.small?'small':this.big?'big':''}` onClick=this.onClick>
+				<Image class="img" src=this.icon />
+				<Div class="con">
+					<Indep class="left">
+						<Text class="txt" value=this.text />
+						{this.desc?<Text class="txt txt2" value=this.desc />: null}
+					</Indep>
+					<Indep x=-10 alignX="right" alignY="center">
+						<Text value="\uedbe" textFamily="icomoon-ultimate" textColor="#aaa" />
+					</Indep>
+				</Div>
+			</Div>
+		);
+	}
+}
+
+NavBtn.defineProps(['icon', 'text', 'desc', 'small', 'big']);
+
+/**
+ * @class NavBtnPrice
+ */
+export class NavBtnPrice extends ViewController {
+	event onClick;
 	render() {
 		return (
 			<Div class="iwitem" onClick=this.onClick>
@@ -104,78 +139,49 @@ export class BtnItem extends ViewController {
 			</Div>
 		);
 	}
-	event onClick;
 }
 
-BtnItem.defineProps(['icon', 'text', 'balance', 'money', 'desc' ]);
-
-/**
- * @class NavBtn
- */
-export class NavBtn extends ViewController {
-	render() {
-		return (
-			<Div class="iwitem" onClick=this.onClick>
-				<Image class="img" src=this.icon />
-				<Div class="con">
-					<Indep class="left">
-						<Text class="txt" value=this.text />
-						{this.desc?<Text class="txt txt2" value=this.desc />: null}
-					</Indep>
-					<Indep x=-10 alignX="right" alignY="center">
-						<Text value="\uedbe" textFamily="icomoon-ultimate" textColor="#aaa" />
-					</Indep>
-				</Div>
-			</Div>
-		);
-	}
-	event onClick;
-}
-
-NavBtn.defineProps(['icon', 'text', 'desc']);
+NavBtnPrice.defineProps(['icon', 'text', 'balance', 'money', 'desc' ]);
 
 CSS({
 	'.long_btn': {
-		margin: 10,
+		margin: 6,
 		width: "full",
-		height: 40,
-		textLineHeight: 40,
-		textColor: "#0079ff",
-		borderRadius: 8,
-		border: `${px} #0079ff`,
-
-		// .g_btn:active {
-		// 	opacity: 0.7;
-		// }
-		
-		// /*.foot */
-		// .g_btn.trans {
-		// 	background: none;
-		// 	color: #084697;
-		// }
-		
-		// /*.foot */
-		// .g_btn.white {
-		// 	background: #fff;
-		// 	color: #084697;
-		// }
-		
-		// /*.foot */
-		// .g_btn.light {
-		// 	background: #F0F4F9;
-		// 	color: #004697;
-		// }
-		
-		// /*.foot */
-		// .g_btn.disable, .g_btn.gray {
-		// 	background: #c9c9d2;
-		// 	color: #fff;
-		// 	/*pointer-events: none;*/
-		// }
-	}, 
-	'.long_btn.white': {
+		// height: 46,
+		textLineHeight: 46,
 		textColor: "#fff",
-		border: `${px} #fff`,
+		textSize: 16,
+		borderRadius: 8,
+		backgroundColor: '#0a8de7',
+	}, 
+	'.long_btn.trans': {
+		textColor: "#0079ff",
+		border: `${px} #0079ff`,
+		backgroundColor: 'none',
+	},
+	'.long_btn.white': {
+		backgroundColor: '#fff',
+		textColor: '#084697',
+	},
+	'.long_btn.light': {
+		backgroundColor: '#e3f0f9',
+		textColor: '#0a8de7',
+	},
+	'.long_btn.gray, .long_btn.disable': {
+		backgroundColor: '#c9c9d2',
+		textColor: '#fff',
+	},
+	'.G_btns': {
+		width: '20!',
+		alignY: 'bottom',
+		alignX: 'left',
+		x: 10,
+		y: -10,
+	},
+	'.G_nav_space': {
+		width: '100%',
+		height: 20,
+		backgroundColor: '#f3f4f6',
 	},
 });
 

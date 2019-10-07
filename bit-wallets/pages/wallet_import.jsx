@@ -273,9 +273,6 @@ export default class Import extends NavPage {
 			</Tabs>
 		);
 	}
-	m_handle_click() {
-		// alert('导入');
-	}
 	m_handle_click_1() {
 		var tab = this.IDs.tabs.tab;
 		if (tab == 0) {

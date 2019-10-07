@@ -30,7 +30,7 @@
 
 import { Div, ngui } from 'ngui';
 import { NavPage } from 'ngui/nav';
-import { sheet } from 'ngui/dialog';
+import { sheetConfirm } from 'ngui/dialog';
 import { NavBtn } from '../btns';
 import Create from './wallet_create';
 import Import from './wallet_import';
@@ -50,12 +50,12 @@ export default class WalletAdds extends NavPage {
 	
 	m_handle_click(e) {
 		var type = e.sender.id;
-		sheet(['创建','导入',`了解${type}`], (index)=>{
-			if (index == 1) {
+		sheetConfirm(['创建','导入',`了解${type}`], (index)=>{
+			if (index == 3) {
 				this.collection.push(<Create type=type title=`创建${type}钱包` />, 1);
 			} else if (index == 2) {
 				this.collection.push(<Import type=type title=`导入${type}钱包` />, 1);
-			} else if (index == 3) {
+			} else if (index == 1) {
 				var tokens = {
 					BTC: 'bitcoin',
 					ETH: 'ethereum',

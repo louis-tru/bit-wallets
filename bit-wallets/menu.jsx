@@ -28,7 +28,9 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {CSS, atomPixel, Button, Text, Hybrid} from 'ngui';
+import {
+	CSS, atomPixel as px, Button, Text, Hybrid,
+} from 'ngui';
 import { Overlay } from 'ngui/overlay';
 
 CSS({
@@ -38,7 +40,7 @@ CSS({
 		textLineHeight: 45,
 		textAlign: "left",
 		borderRadius: 0,
-		borderBottom: `${atomPixel} #c8c7cc`,
+		borderBottom: `${px} #c8c7cc`,
 		textColor: "#0079ff",
 	},
 	

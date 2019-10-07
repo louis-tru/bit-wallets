@@ -28,38 +28,13 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
-import 'ngui/font';
-import 'ngui/reader';
-import { GUIApplication, Root } from 'ngui';
-import { NavPageCollection } from 'ngui/nav';
-import Index from './pages/index';
-import './cn';
-import './common';
+import {CSS,atomPixel as px} from 'ngui';
 
-import MnemonicWord from './pages/mnemonic_word';
-import WalletSettings from './pages/wallet_settings';
-import BackupTip from './pages/backup_tip';
-import ExportKeystore from './pages/export_keystore';
-
-new GUIApplication({
-	multisample: 4,
-	width: 375,
-	height: 700,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			<ExportKeystore />
-			{/* <BackupTip /> */}
-			{/* <WalletSettings /> */}
-			{/* <MnemonicWord /> */}
-			{/* <Index /> */}
-		</NavPageCollection>
-	</Root>
-);
-
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+CSS({
+	'.G_line': {
+		width: '100%',
+		height: px,
+		// borderRadius:
+		backgroundColor: '#e6e6e6',
+	},
+});

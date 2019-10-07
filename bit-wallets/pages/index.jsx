@@ -74,13 +74,12 @@ class IndexNavbar extends Navbar {
 	}
 
 	m_handle_show_menu(e) {
-		var items = [
-			{icon:'\ueb4d',text:'添加钱包'},
-			{icon:'\ue9f8',text:'扫一扫'},
-			{icon:'\uea15',text:'收付款'},
-		];
 		render(
-			<Menu items=items onItemAction=(e=>this.m_handle_menu_item(e)) />
+			<Menu items=[
+				{icon:'\ueb4d',text:'添加钱包'},
+				{icon:'\ue9f8',text:'扫一扫'},
+				{icon:'\uea15',text:'收付款'},
+			] onItemAction=(e=>this.m_handle_menu_item(e)) />
 		).showOverlayFromView(e.sender);
 	}
 

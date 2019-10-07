@@ -32,7 +32,7 @@ import { Div, Image, Indep, Input, CSS } from 'ngui';
 import { NavPage } from 'ngui/nav';
 import { alert } from 'ngui/dialog';
 import { Btn } from '../btns';
-import WordsBackup from './words_backup';
+import MnemonicWord from './mnemonic_word';
 
 const {resolve} = require;
 
@@ -55,13 +55,13 @@ CSS({
 		borderRadius: 5,
 		textSize: 14,
 	},
-	'.wcreate .btns': {
-		width: '20!',
-		alignY: 'bottom',
-		alignX: 'left',
-		x: 10,
-		y: -10,
-	},
+	// '.wcreate .btns': {
+	// 	width: '20!',
+	// 	alignY: 'bottom',
+	// 	alignX: 'left',
+	// 	x: 10,
+	// 	y: -10,
+	// },
 });
 
 /**
@@ -81,14 +81,14 @@ export default class Create extends NavPage {
 				<Input class="input" textMargin=15 security=1 placeholder="钱包密码" />
 				<Input class="input" textMargin=15 security=1 placeholder="重复输入密码" />
 				<Input class="input" textMargin=15 placeholder="密码提示信息" />
-				<Indep class="btns">
+				<Indep class="G_btns">
 					<Btn onClick="m_handle_click">创建</Btn>
 				</Indep>
 			</Div>
 		);
 	}
 	m_handle_click() {
-		this.collection.push(<WordsBackup />, 1);
+		this.collection.push(<MnemonicWord />, 1);
 	}
 }
 

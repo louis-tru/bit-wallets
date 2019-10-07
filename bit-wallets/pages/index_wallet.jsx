@@ -31,7 +31,8 @@
 import { 
 	Scroll, ViewController
 } from 'ngui';
-import { BtnItem } from '../btns';
+import {NavBtnPrice} from '../btns';
+import {alert,prompt} from 'ngui/dialog';
 
 const {resolve} = require;
 
@@ -41,13 +42,14 @@ export default class IndexWallet extends ViewController {
 
 	m_handle_click(e) {
 		// this.collection.push(<Index toolbar.hidden=true />, 1);
+		prompt('Prompt lllll');
 	}
 
 	render() {
 		return (
 			<Scroll class="index">
-				<BtnItem icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
-				<BtnItem icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
+				<NavBtnPrice icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
+				<NavBtnPrice icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
 			</Scroll>
 		);
 	}
