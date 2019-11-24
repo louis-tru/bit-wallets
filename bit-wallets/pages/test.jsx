@@ -28,32 +28,31 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
-import 'ngui/font';
-import 'ngui/reader';
-import { GUIApplication, Root } from 'ngui';
-import { NavPageCollection } from 'ngui/nav';
-import Index from './pages/index';
-import './cn';
-import './common';
+import { 
+	Div,Scroll,
+} from 'ngui';
+import { NavPage } from 'ngui/nav';
+import { Btn } from '../btns';
 
-import Test from './pages/test';
+import Index from './index';
+import MnemonicWord from './mnemonic_word';
+import WalletSettings from './wallet_settings';
+import BackupTip from './backup_tip';
+import ExportKeystore from './export_keystore';
+import NoSecretPayment from './no_secret_payment';
 
-new GUIApplication({
-	multisample: 4,
-	width: 375,
-	height: 700,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			{/* <Index /> */}
-			<Test toolbar.hidden=true title="Test" />
-		</NavPageCollection>
-	</Root>
-);
-
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+export default class Test extends NavPage {
+	render() {
+		return super.render(
+			<Scroll width="100%" height="100%">
+				<Div width="100%" height=5 />
+				<Btn onClick=(e=>this.collection.push(Index, 1))>Index</Btn>
+				<Btn onClick=(e=>this.collection.push(ExportKeystore, 1))>ExportKeystore</Btn>
+				<Btn onClick=(e=>this.collection.push(BackupTip, 1))>BackupTip</Btn>
+				<Btn onClick=(e=>this.collection.push(WalletSettings, 1))>WalletSettings</Btn>
+				<Btn onClick=(e=>this.collection.push(MnemonicWord, 1))>MnemonicWord</Btn>
+				<Btn onClick=(e=>this.collection.push(NoSecretPayment, 1))>NoSecretPayment</Btn>
+			</Scroll>
+		);
+	}
+}

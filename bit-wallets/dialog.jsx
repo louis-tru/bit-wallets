@@ -28,32 +28,35 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
-import 'ngui/font';
-import 'ngui/reader';
-import { GUIApplication, Root } from 'ngui';
-import { NavPageCollection } from 'ngui/nav';
-import Index from './pages/index';
-import './cn';
-import './common';
+import {Hybrid,CSS,Image} from 'ngui';
+import * as dialog from 'ngui/dialog';
 
-import Test from './pages/test';
+export dialog;
 
-new GUIApplication({
-	multisample: 4,
-	width: 375,
-	height: 700,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
-	background: 0xffffff,
-	title: 'BITWallets',
-}).start(
-	<Root>
-		<NavPageCollection id="nav">
-			{/* <Index /> */}
-			<Test toolbar.hidden=true title="Test" />
-		</NavPageCollection>
-	</Root>
-);
+const resolve = require.resolve;
 
-font.registerFont( reader.readFileSync(require.resolve('./icomoon.ttf')) );
+CSS({
+	'.fingerprint': {
+		textColor: '#848484',
+		textAlign: 'center',
+		textSize: 14,
+		marginBottom: 5,
+	},
+	'.fingerprint .img': {
+		width: 50,
+		height: 50,
+		margin: '10 0 20 0',
+	},
+});
+
+export function fingerprint(cb=utils.noop) {
+	var d = dialog.show('', <Hybrid class="fingerprint">
+		<Image class="img" src=resolve('../img/icon-6.png') />\n
+		请使用指纹验证
+	</Hybrid>, ['取消'], e=>{
+		cb(false);
+	});
+	// TODO call fingerprint ...
+
+	return d;
+}
