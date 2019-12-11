@@ -38,8 +38,6 @@ CSS({
 
 export default class IndexMy extends ViewController {
 
-	title = '我';
-
 	render() {
 		return (
 			<Div class="index">

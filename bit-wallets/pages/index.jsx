@@ -55,7 +55,7 @@ CSS({
 	'.toolbar_btn .txt': {
 		textSize: 10,
 	},
-})
+});
 
 /**
  * @class IndexNavbar

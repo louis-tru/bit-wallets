@@ -38,8 +38,6 @@ CSS({
 
 export default class IndexPrice extends ViewController {
 
-	title = '行情';
-
 	render() {
 		return (
 			<Div class="index">

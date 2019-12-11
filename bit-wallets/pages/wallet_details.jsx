@@ -28,26 +28,21 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { 
-	Scroll, ViewController
-} from 'ngui';
-import {NavBtnPrice} from '../btns';
-import WalletDetails from './wallet_details';
+import { Div, CSS } from 'ngui';
+import { NavPage } from 'ngui/nav';
 
-const {resolve} = require;
+CSS({
+	'.wd': {
+		
+	},
+})
 
-export default class IndexWallet extends ViewController {
-
-	m_handle_click(e) {
-		this.owner.collection.push(<WalletDetails toolbar.hidden=true title=e.sender.text />, true);
-	}
+export default class WalletDetails extends NavPage {
 
 	render() {
-		return (
-			<Scroll class="index">
-				<NavBtnPrice icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC-Wallet" balance="1.01" money="7980.00" />
-				<NavBtnPrice icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH-Wallet" balance="2.42" money="300.00" />
-			</Scroll>
+		return super.render(
+			<Div class="wd">WalletDetails</Div>
 		);
 	}
+
 }
