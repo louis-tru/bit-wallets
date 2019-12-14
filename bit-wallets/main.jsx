@@ -34,6 +34,7 @@ import 'ngui/reader';
 import { GUIApplication, Root } from 'ngui';
 import { NavPageCollection } from 'ngui/nav';
 import Index from './pages/index';
+import WalletDetails from './pages/wallet_details';
 import './cn';
 import './common';
 
@@ -51,7 +52,8 @@ new GUIApplication({
 	<Root>
 		<NavPageCollection id="nav">
 			{/* <Index /> */}
-			<Test toolbar.hidden=true title="Test" />
+			{/* <Test toolbar.hidden=true title="Test" /> */}
+			<WalletDetails toolbar.hidden=true title="ETH-Wallet" />
 		</NavPageCollection>
 	</Root>
 );

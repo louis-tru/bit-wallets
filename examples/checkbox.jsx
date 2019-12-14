@@ -1,9 +1,9 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
  *
- * Copyright (c) 2019, xuewen.chu
+ * Copyright (c) 2015, xuewen.chu
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +14,7 @@
  *     * Neither the name of xuewen.chu nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,82 +25,64 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Div, Scroll, Text, TextNode, Hybrid, Button } from 'ngui';
-import {alert} from 'ngui/dialog';
-import { NavPage } from 'ngui/nav';
+import { Div, Text, CSS, atomPixel } from 'ngui';
+import { Switch, Checkbox } from 'ngui/checkbox';
+import { Mynavpage } from './public';
+
+var resolve = require.resolve;
+
 
 CSS({
-	'.wd': {
-		width: '100%',
-		height: '100%',
-	},
-	'.wd .box1': {
-		margin: 12,
+	'.checkbox_page': {
 		width: 'full',
-		height: 155,
-		backgroundColor: '#0693c1',
-		borderRadius: 8,
 	},
-	'.wd .txt1': {
-		width: '63!',
-		height: 34,
-		marginTop: 14,
-		marginLeft: 30,
-		textSize: 18,
-		textColor: '#fff',
-	},
-	'.wd .txt2': {
-		marginTop: 14,
-		textSize: 18,
-		textColor: '#fff',
-		textFamily: 'icomoon-ultimate',
-	},
-	'.wd .txt3': {
-		height: 31,
-		width: 225,
-		marginLeft: 30,
-		textSize: 14,
-		textLineHeight: 31,
-		textColor: '#fff',
-		textOverflow: 'center_ellipsis',
-		textWhiteSpace: 'wrap',
-	},
-	'.wd .txt4': {
-		width: 32,
-		textSize: 14,
-		textColor: '#fff',
-		textLineHeight: 31,
-		textFamily: 'icomoon-ultimate',
-		textAlign: 'center',
-	},
-	'.wd .txt5': {
+	'.checkbox_page .item': {
 		width: 'full',
-		marginTop: 21,
-		marginRight: 23,
-		textLineHeight: 55,
-		textAlign: 'right',
-		textSize: 30,
-		textColor: '#fff',
+		borderBottom: `${atomPixel} #ccc`,
+	},
+	'.checkbox_page .text': {
+		width: '100!',
+		margin: 13,
 	},
 })
 
-export default class WalletDetails extends NavPage {
-
-	render() {
-		return super.render(
-			<Div class="wd">
-				<Div class="box1">
-					<Text class="txt1" value="ETH-Wallet" />
-					<Button class="txt2" onClick=(e=>alert('test'))>\uec6a</Button>
-					<Text class="txt3" value="0xb5c4492ae07311Ab3CDa11C8481060A737CEa438" />
-					<Button class="txt4" onClick=(e=>alert('test2'))>\ue9f8</Button>
-					<Hybrid class="txt5"><TextNode value="￥" textSize=20 y=-7 />0.00</Hybrid>
-				</Div>
-			</Div>
-		);
-	}
-
+function change_handle(evt) {
+	var checkbox = evt.sender;
+	var str = checkbox.selected ? 'YES' : 'NO';
+	str += checkbox.disable ? ',Disable' : '';
+	checkbox.dom.prev.value = str;
 }
+
+export const vx = ()=>(
+	<Mynavpage title="Checkbox" source=resolve(__filename)>
+		<Div width="full" class="checkbox_page">
+			<Div class="item">
+				<Text class="text" value="YES" />
+				<Switch onChange=change_handle style={margin:10} selected=1 />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="NO,Disable" />
+				<Switch onChange=change_handle style={margin:10} disable=1 />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="NO" />
+				<Switch onChange=change_handle style={margin:10} />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="YES" />
+				<Checkbox onChange=change_handle style={margin:13} selected=1 />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="YES,Disable" />
+				<Checkbox onChange=change_handle style={margin:13} disable=1 selected=1 />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="NO" />
+				<Checkbox onChange=change_handle style={margin:13} />
+			</Div>
+		</Div>
+	</Mynavpage>
+)

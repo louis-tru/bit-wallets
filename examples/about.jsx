@@ -1,9 +1,9 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
  *
- * Copyright (c) 2019, xuewen.chu
+ * Copyright (c) 2015, xuewen.chu
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +14,7 @@
  *     * Neither the name of xuewen.chu nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,82 +25,39 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Div, Scroll, Text, TextNode, Hybrid, Button } from 'ngui';
-import {alert} from 'ngui/dialog';
-import { NavPage } from 'ngui/nav';
+import { Div, Button, Text, Scroll } from 'ngui';
+import { Mynavpage } from './public';
 
-CSS({
-	'.wd': {
-		width: '100%',
-		height: '100%',
-	},
-	'.wd .box1': {
-		margin: 12,
-		width: 'full',
-		height: 155,
-		backgroundColor: '#0693c1',
-		borderRadius: 8,
-	},
-	'.wd .txt1': {
-		width: '63!',
-		height: 34,
-		marginTop: 14,
-		marginLeft: 30,
-		textSize: 18,
-		textColor: '#fff',
-	},
-	'.wd .txt2': {
-		marginTop: 14,
-		textSize: 18,
-		textColor: '#fff',
-		textFamily: 'icomoon-ultimate',
-	},
-	'.wd .txt3': {
-		height: 31,
-		width: 225,
-		marginLeft: 30,
-		textSize: 14,
-		textLineHeight: 31,
-		textColor: '#fff',
-		textOverflow: 'center_ellipsis',
-		textWhiteSpace: 'wrap',
-	},
-	'.wd .txt4': {
-		width: 32,
-		textSize: 14,
-		textColor: '#fff',
-		textLineHeight: 31,
-		textFamily: 'icomoon-ultimate',
-		textAlign: 'center',
-	},
-	'.wd .txt5': {
-		width: 'full',
-		marginTop: 21,
-		marginRight: 23,
-		textLineHeight: 55,
-		textAlign: 'right',
-		textSize: 30,
-		textColor: '#fff',
-	},
-})
+var resolve = require.resolve;
 
-export default class WalletDetails extends NavPage {
+export default const vx = ()=>{
 
-	render() {
-		return super.render(
-			<Div class="wd">
-				<Div class="box1">
-					<Text class="txt1" value="ETH-Wallet" />
-					<Button class="txt2" onClick=(e=>alert('test'))>\uec6a</Button>
-					<Text class="txt3" value="0xb5c4492ae07311Ab3CDa11C8481060A737CEa438" />
-					<Button class="txt4" onClick=(e=>alert('test2'))>\ue9f8</Button>
-					<Hybrid class="txt5"><TextNode value="￥" textSize=20 y=-7 />0.00</Hybrid>
-				</Div>
-			</Div>
-		);
-	}
+	var code = `Ngui
+	===============
+	
+	Used C/C++/OpenGL/javascript to implement a GUI typesetting display engine and cross platform GUI application development framework
+	Goal: developing GUI applications on this basis can take into account both the simplicity and speed of developing WEB applications, as well as the performance and experience of Native applications.
+	
+	使用C/C++/OpenGL/javascript实现的一个GUI排版显示引擎与跨平台GUI应用开发框架
+	目标：在此基础上开发GUI应用程序可兼顾开发WEB应用程序的简单与速度同时拥有Native应用程序的性能与体验.
+	
+	Ngui Source 
+	===============
+	https://github.com/louis-tru/ngui.git
+	
+	Support
+	===============
+	http://ngui.fun
+	louistru@hotmail.com`;
 
-}
+	return (
+		<Mynavpage title="About" source=resolve(__filename)>
+			<Scroll width="full" height="full">
+				<Text width="full" margin=10 value=code />
+			</Scroll>
+		</Mynavpage>
+	);
+};

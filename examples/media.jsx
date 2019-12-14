@@ -1,9 +1,9 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
  *
- * Copyright (c) 2019, xuewen.chu
+ * Copyright (c) 2015, xuewen.chu
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +14,7 @@
  *     * Neither the name of xuewen.chu nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,82 +25,78 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Div, Scroll, Text, TextNode, Hybrid, Button } from 'ngui';
-import {alert} from 'ngui/dialog';
-import { NavPage } from 'ngui/nav';
+import { Div, Button } from 'ngui';
+import { AudioPlayer, Video } from 'ngui/media';
+import { Mynavpage } from './public';
+import * as aaaa from 'ngui/path';
 
-CSS({
-	'.wd': {
-		width: '100%',
-		height: '100%',
-	},
-	'.wd .box1': {
-		margin: 12,
-		width: 'full',
-		height: 155,
-		backgroundColor: '#0693c1',
-		borderRadius: 8,
-	},
-	'.wd .txt1': {
-		width: '63!',
-		height: 34,
-		marginTop: 14,
-		marginLeft: 30,
-		textSize: 18,
-		textColor: '#fff',
-	},
-	'.wd .txt2': {
-		marginTop: 14,
-		textSize: 18,
-		textColor: '#fff',
-		textFamily: 'icomoon-ultimate',
-	},
-	'.wd .txt3': {
-		height: 31,
-		width: 225,
-		marginLeft: 30,
-		textSize: 14,
-		textLineHeight: 31,
-		textColor: '#fff',
-		textOverflow: 'center_ellipsis',
-		textWhiteSpace: 'wrap',
-	},
-	'.wd .txt4': {
-		width: 32,
-		textSize: 14,
-		textColor: '#fff',
-		textLineHeight: 31,
-		textFamily: 'icomoon-ultimate',
-		textAlign: 'center',
-	},
-	'.wd .txt5': {
-		width: 'full',
-		marginTop: 21,
-		marginRight: 23,
-		textLineHeight: 55,
-		textAlign: 'right',
-		textSize: 30,
-		textColor: '#fff',
-	},
-})
+// const src_720 = 'http://ngui.fun/media/2017-09-11_15_41_19.mp4';
+const src_720 = 'http://ngui.fun/media/piper720p.mp4';
+const audio_src = 'http://ngui.fun/media/all_we_know.mp3';
 
-export default class WalletDetails extends NavPage {
+var resolve = require.resolve;
 
-	render() {
-		return super.render(
-			<Div class="wd">
-				<Div class="box1">
-					<Text class="txt1" value="ETH-Wallet" />
-					<Button class="txt2" onClick=(e=>alert('test'))>\uec6a</Button>
-					<Text class="txt3" value="0xb5c4492ae07311Ab3CDa11C8481060A737CEa438" />
-					<Button class="txt4" onClick=(e=>alert('test2'))>\ue9f8</Button>
-					<Hybrid class="txt5"><TextNode value="￥" textSize=20 y=-7 />0.00</Hybrid>
-				</Div>
-			</Div>
-		);
-	}
+var audio_player = null;
 
+function PlayVideo(evt) {
+	StopAudio(evt);
+	var v = evt.sender.owner.IDs.video;
+	v.src = src_720;
+	v.start();
 }
+
+function PlayAudio(evt) {
+	StopVideo(evt);
+	if ( !audio_player ) {
+		audio_player = new AudioPlayer();
+	}
+	audio_player.src = audio_src;
+	audio_player.start();
+}
+
+function StopVideo(evt) {
+	evt.sender.owner.IDs.video.stop();
+}
+
+function StopAudio(evt) {
+	if ( audio_player ) {
+		audio_player.stop();
+		audio_player = null;
+	}
+}
+
+function Stop(evt) {
+	StopVideo(evt);
+	StopAudio(evt);
+}
+
+function Seek(evt) {
+	if ( audio_player ) {
+		audio_player.seek(10000); // 10s
+	} else {
+		evt.sender.owner.IDs.video.seek(100000); // 100s
+	}
+}
+
+export const vx = ()=>(
+	<Mynavpage title="Media" source=resolve(__filename) onRemove=StopAudio>
+		<Div width="full">
+			<Button class="long_btn" onClick=PlayVideo>Play Video</Button>
+			<Button class="long_btn" onClick=PlayAudio>Play Audio</Button>
+			<Button class="long_btn" onClick=Stop>Stop</Button>
+
+			<Video 
+				id="video" 
+				marginTop=10
+				borderRadius=20 
+				_border="8 #f00" 
+				clip=false
+				width="full" 
+				backgroundColor="#000" 
+			/>
+		</Div>
+	</Mynavpage>
+)
