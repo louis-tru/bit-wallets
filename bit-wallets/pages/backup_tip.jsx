@@ -36,6 +36,9 @@ import {NavPage} from 'ngui/nav';
 import {Btn} from '../btns';
 import {sheet,alert} from 'ngui/dialog';
 import * as utils from 'ngui/util';
+import MnemonicWord from './mnemonic_word';
+import ExportKeystore from './export_keystore';
+import ExportPrivkey from './export_keystore';
 
 var {resolve} = require;
 
@@ -110,12 +113,21 @@ export default class BackupTip extends NavPage {
 
 	m_handle_click() {
 		sheetTip(e=>{
-			if (e)
-				alert('知道了');
+			if (e) {
+				if (this.type == 1) { // MnemonicWord
+					this.collection.push(<MnemonicWord />, true);
+				} else if (this.type == 2) {
+					this.collection.push(<ExportKeystore />, true);
+				} else if (this.type == 3) {
+					this.collection.push(<ExportPrivkey />, true);
+				}
+			}
 		});
 	}
 
 }
+
+BackupTip.defineProps({type: 1});
 
 CSS({
 	'.bt_s': {

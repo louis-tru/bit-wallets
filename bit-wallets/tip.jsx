@@ -84,7 +84,7 @@ export default class Tip extends ViewController {
 
 	render() {
 		return (
-			<indep class="tip" receive=1 opacity=0>
+			<indep class="tip" _receive=1 opacity=0>
 				<indep class="box0">
 					<hybrid class="box1">
 						<img class="icon" src=ICONS[this.icon] />\n
@@ -100,7 +100,7 @@ export default class Tip extends ViewController {
 		utils.assert(r, 'not find root view');
 		this.appendTo(r);
 		this.dom.transition({opacity:1,time:500});
-		utils.sleep(3e3).then(e=>{
+		utils.sleep(2e3).then(e=>{
 			this.dom.transition({opacity:0,time:500}, e=>this.remove());
 		});
 		return this;

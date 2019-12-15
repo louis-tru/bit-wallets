@@ -35,6 +35,8 @@ import { GUIApplication, Root } from 'ngui';
 import { NavPageCollection } from 'ngui/nav';
 import Index from './pages/index';
 import WalletDetails from './pages/wallet_details';
+import password_prompt from './pages/password_prompt';
+
 import './cn';
 import './common';
 
@@ -51,9 +53,10 @@ new GUIApplication({
 }).start(
 	<Root>
 		<NavPageCollection id="nav">
-			{/* <Index /> */}
+			<Index />
 			{/* <Test toolbar.hidden=true title="Test" /> */}
-			<WalletDetails toolbar.hidden=true title="ETH-Wallet" />
+			{/* <WalletDetails toolbar.hidden=true title="ETH-Wallet" /> */}
+			{/* <password_prompt prompt="123456" /> */}
 		</NavPageCollection>
 	</Root>
 );
