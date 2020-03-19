@@ -29,19 +29,15 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	ViewController, CSS, ngui,
-	Hybrid as hybrid, 
-	Indep as indep,
-	Image as img, 
-	Div as div,
-	Text as text,
-	render,
+	ViewController, default as ngui,
+	Hybrid, Indep, Image, Text, _CVD
 } from 'ngui';
-import * as utils from 'ngui/util';
+import utils from 'ngui/util';
+import {prop} from 'ngui/ctr';
 
-var {resolve} = require;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.tip': {
 		width: '100%',
 		height: '100%',
@@ -71,7 +67,7 @@ CSS({
 	},
 });
 
-var ICONS = {
+const ICONS: Dict<string> = {
 	ok: resolve('./img/icon-ok.png'),
 	fail: resolve('./img/icon-fail.png'),
 };
@@ -81,17 +77,19 @@ var ICONS = {
  * @extends ViewController
  */
 export default class Tip extends ViewController {
+	@prop value = 'tip';
+	@prop icon = 'ok';
 
 	render() {
 		return (
-			<indep class="tip" _receive=1 opacity=0>
-				<indep class="box0">
-					<hybrid class="box1">
-						<img class="icon" src=ICONS[this.icon] />\n
-						<text class="txt1" value=this.value />
-					</hybrid>
-				</indep>
-			</indep>
+			<Indep class="tip" _receive={1} opacity={0}>
+				<Indep class="box0">
+					<Hybrid class="box1">
+						<Image class="icon" src={ICONS[this.icon]} />\n
+						<Text class="txt1" value={this.value} />
+					</Hybrid>
+				</Indep>
+			</Indep>
 		);
 	}
 
@@ -99,16 +97,14 @@ export default class Tip extends ViewController {
 		var r = ngui.root;
 		utils.assert(r, 'not find root view');
 		this.appendTo(r);
-		this.dom.transition({opacity:1,time:500});
+		this.domAs().transition({opacity:1,time:500});
 		utils.sleep(2e3).then(e=>{
-			this.dom.transition({opacity:0,time:500}, e=>this.remove());
+			this.domAs().transition({opacity:0,time:500}, e=>this.remove());
 		});
 		return this;
 	}
 }
 
-Tip.defineProps({icon: 'ok', value: 'tip'});
-
 export function showTip(tip = 'tip', icon = 'ok') {
-	return render(<Tip value=tip icon=icon />).show();
+	return ngui.render<Tip>(<Tip value={tip} icon={icon} />).show();
 }

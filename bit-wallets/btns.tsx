@@ -29,11 +29,15 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Hybrid,Div, CSS, Image, Indep, Button,
-	atomPixel as px, TextNode, Text, ViewController
+	Hybrid,Div, Image, Indep, Button,
+	TextNode, Text, ViewController, default as ngui, _CVD
 } from 'ngui';
+import { event, EventNoticer, GUIClickEvent } from 'ngui/event';
+import { prop } from 'ngui/ctr';
 
-CSS({
+const px = ngui.atomPixel;
+
+ngui.css({
 	'.iwitem': {
 		width: '100%',
 		height: 60,
@@ -96,17 +100,24 @@ CSS({
  * @class NavBtn
  */
 export class NavBtn extends ViewController {
-	event onClick;
+	@prop icon: string = '';
+	@prop text: string = '';
+	@prop desc: string = '';
+	@prop small: boolean = false;
+	@prop big: boolean = false;
+
+	@event readonly onClick: EventNoticer<GUIClickEvent>;
+	
 	render() {
 		return (
-			<Div class=`iwitem ${this.small?'small':this.big?'big':''}` onClick=this.onClick>
-				<Image class="img" src=this.icon />
+			<Div class={`iwitem ${this.small?'small':this.big?'big':''}`} onClick={this.onClick}>
+				<Image class="img" src={this.icon} />
 				<Div class="con">
 					<Indep class="left">
-						<Text class="txt" value=this.text />
-						{this.desc?<Text class="txt txt2" value=this.desc />: null}
+						<Text class="txt" value={this.text} />
+						{this.desc?<Text class="txt txt2" value={this.desc} />: null}
 					</Indep>
-					<Indep x=-10 alignX="right" alignY="center">
+					<Indep x={-10} alignX="right" alignY="center">
 						<Text value="\uedbe" textFamily="icomoon-ultimate" textColor="#aaa" />
 					</Indep>
 				</Div>
@@ -115,25 +126,30 @@ export class NavBtn extends ViewController {
 	}
 }
 
-NavBtn.defineProps(['icon', 'text', 'desc', 'small', 'big']);
-
 /**
  * @class NavBtnPrice
  */
 export class NavBtnPrice extends ViewController {
-	event onClick;
+	@prop icon = '';
+	@prop text = '';
+	@prop balance = 0;
+	@prop money = 0;
+	@prop desc = '';
+
+	@event readonly onClick: EventNoticer<GUIClickEvent>;
+
 	render() {
 		return (
-			<Div class="iwitem" onClick=this.onClick>
-				<Image class="img" src=this.icon />
+			<Div class="iwitem" onClick={this.onClick}>
+				<Image class="img" src={this.icon} />
 				<Div class="con">
 					<Indep class="left">
-						<Text class="txt" value=this.text />
-						{this.desc?<Text class="txt txt2" value=this.desc />: null}
+						<Text class="txt" value={this.text} />
+						{this.desc?<Text class="txt txt2" value={this.desc} />: null}
 					</Indep>
 					<Hybrid class="right">
-						<TextNode value=this.balance />
-						<TextNode value=('\n$'+this.money) textColor="#888" />
+						<TextNode value={this.balance} />
+						<TextNode value={'\n$'+this.money} textColor="#888" />
 					</Hybrid>
 				</Div>
 			</Div>
@@ -141,9 +157,7 @@ export class NavBtnPrice extends ViewController {
 	}
 }
 
-NavBtnPrice.defineProps(['icon', 'text', 'balance', 'money', 'desc' ]);
-
-CSS({
+ngui.css({
 	'.long_btn': {
 		margin: 6,
 		width: "full",
@@ -186,12 +200,15 @@ CSS({
 });
 
 export class Btn extends ViewController {
-	render(...vdoms) {
+	@prop color = '';
+	@prop class = '';
+
+	@event readonly onClick: EventNoticer<GUIClickEvent>;
+
+	render(...vdoms: any[]) {
 		return (
-			<Button class=`long_btn ${this.color} ${this.class}` onClick=this.onClick>{vdoms}</Button>
+			<Button class={`long_btn ${this.color} ${this.class}`} onClick={this.onClick}>{vdoms}</Button>
 		);
 	}
-	event onClick;
-}
 
-Btn.defineProps({ color: '', 'class': '' });
+}

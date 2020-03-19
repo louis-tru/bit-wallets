@@ -29,11 +29,15 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, atomPixel as px, Button, Text, Hybrid,
+	default as ngui, Button, Text, Hybrid, _CVD
 } from 'ngui';
 import { Overlay } from 'ngui/overlay';
+import { event, EventNoticer, Event } from 'ngui/event';
+import { prop } from 'ngui/ctr';
 
-CSS({
+const px = ngui.atomPixel;
+
+ngui.css({
 
 	'.o_btn': {
 		width: "full",
@@ -60,21 +64,24 @@ CSS({
 
 export default class Menu extends Overlay {
 
-	event onItemAction;
+	@prop items: ({icon?: string,text: string})[] = [];
+	@event readonly onItemAction: EventNoticer<Event<number>>;
+
+	protected triggerItemAction(index: number) {
+		this.trigger('ItemAction', index);
+	}
 
 	render() {
 		return super.render(
 			this.items.map(({icon,text},i)=>(
-				<Button class="o_btn" defaultHighlighted=0 onClick=(e=>this.triggerItemAction(i))>
+				<Button class="o_btn" defaultHighlighted={0} onClick={()=>this.triggerItemAction(i)}>
 					{ icon ?
-						<Text textFamily="icomoon-ultimate" marginLeft=16 value=icon />: null
+						<Text textFamily="icomoon-ultimate" marginLeft={16} value={icon} />: null
 					}
-					<Hybrid marginLeft=12 marginRight=16>{text}</Hybrid>
+					<Hybrid marginLeft={12} marginRight={16}>{text}</Hybrid>
 				</Button>
 			))
 		);
 	}
 
 }
-
-Menu.defineProps({ items:[] });

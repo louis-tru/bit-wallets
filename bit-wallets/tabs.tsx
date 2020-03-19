@@ -28,13 +28,18 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
+import util from 'ngui/util';
 import { 
-	ViewController, Div, Clip, Indep, 
-	Button, CSS, atomPixel as px, nextFrame,
+	ViewController, Div, Clip, Indep, _CVD,
+	Button, default as ngui
 } from 'ngui';
+import { event, EventNoticer, Event } from 'ngui/event';
+import { prop } from 'ngui/ctr';
 
-CSS({
+const nextFrame = ngui.nextFrame;
+const px = ngui.atomPixel 
+
+ngui.css({
 	'.tabs': {
 		width: '100%',
 		height: '100%',
@@ -74,21 +79,30 @@ CSS({
  */
 export default class Tabs extends ViewController {
 
-	m_handle_click(e) {
-		this.tab = e.sender.index;
-		this.triggerSwitch(this.tab);
+	private m_tabs = 0;
+	@prop tab: number = 0;
+
+	@event onSwitch: EventNoticer<Event<number>>;
+
+	protected triggerSwitch(tab: number) {
+		this.trigger('Switch', tab);
 	}
 
-	triggerUpdate(e) {
-		nextFrame(e=>{
-			var width = this.dom.finalWidth;
-			this.IDs.border.transition({ x: 1 / this.m_tabs * this.tab * width, time: 200 });
-			this.IDs.panels.transition({ x: -width * this.tab, time: 200 });
+	private m_handle_click(index: number) {
+		this.tab = index;
+		this.triggerSwitch(index);
+	}
+
+	triggerUpdate() {
+		nextFrame(()=>{
+			var width = this.domAs<Clip>().finalWidth;
+			this.find<Indep>('border').transition({ x: 1 / this.m_tabs * this.tab * width, time: 200 });
+			this.find<Div>('panels').transition({ x: -width * this.tab, time: 200 });
 		});
-		super.triggerUpdate(e);
+		super.triggerUpdate();
 	}
 
-	render(...vdoms) {
+	render(...vdoms: any[]) {
 		var tabs = this.m_tabs = vdoms.length;
 		var width = 1 / tabs * 100 + '%';
 		var tab = this.tab;
@@ -100,33 +114,30 @@ export default class Tabs extends ViewController {
 							util.assert(ViewController.typeOf(vdom, TabPanel) == 2, 'Type error');
 							return (
 								<Button
-									index=j
-									class=`btn ${tab==j?'on':''}`
-									width=width onClick="m_handle_click"
+									class={`btn ${tab==j?'on':''}`}
+									width={width} onClick={()=>this.m_handle_click(j)}
 								>{vdom.getProp('title')}</Button>
 							);
 						})
 					}
-					<Indep class="border" id="border" width=width />
+					<Indep class="border" id="border" width={width} />
 				</Div>
-				<Div class="panels" id="panels" width=`${tabs}00%`>
-					{vdoms.map(e=>(<Div width=width height="100%">{e}</Div>))}
+				<Div class="panels" id="panels" width={`${tabs}00%`}>
+					{vdoms.map(e=>(<Div width={width} height="100%">{e}</Div>))}
 				</Div>
 			</Clip>
 		);
 	}
-
-	event onSwitch;
 }
-
-Tabs.defineProps({tab:0});
 
 /**
  * @class TabPanel
  */
 export class TabPanel extends ViewController {
 
-	render(...vdoms) {
+	@prop title = '';
+
+	render(...vdoms: any[]) {
 		return (
 			<Div class="panel">
 				{vdoms}
@@ -134,5 +145,3 @@ export class TabPanel extends ViewController {
 		);
 	}
 }
-
-TabPanel.defineProps({title:''});

@@ -28,14 +28,15 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {Hybrid,CSS,Image} from 'ngui';
+import utils from 'ngui/util';
+import {Hybrid,Image,default as ngui, _CVD} from 'ngui';
 import * as dialog from 'ngui/dialog';
 
-export dialog;
+export * from 'ngui/dialog';
 
 const resolve = require.resolve;
 
-CSS({
+ngui.css({
 	'.fingerprint': {
 		textColor: '#848484',
 		textAlign: 'center',
@@ -49,9 +50,9 @@ CSS({
 	},
 });
 
-export function fingerprint(cb=utils.noop) {
+export function fingerprint(cb: (ok: boolean)=>void = utils.noop) {
 	var d = dialog.show('', <Hybrid class="fingerprint">
-		<Image class="img" src=resolve('../img/icon-6.png') />\n
+		<Image class="img" src={resolve('../img/icon-6.png')} />\n
 		请使用指纹验证
 	</Hybrid>, ['取消'], e=>{
 		cb(false);

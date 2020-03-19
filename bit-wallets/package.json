@@ -4,14 +4,9 @@
 	"id": "org.ngui.bit-wallets",
 	"main": "main.jsx",
 	"version": "1.0.0",
-	"extendSyntax": true,
-	"dependencies": {
-	},
 	"_dependencies": {
-		"nxkit": "~0.8.52",
+		"nxkit": "~0.10.35",
 		"safe-tx": "~0.1.12",
 		"crypto-tx": "~0.1.20"
-	},
-	"externDependencies": {
 	}
 }

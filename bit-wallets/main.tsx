@@ -28,10 +28,10 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import 'ngui/util';
-import 'ngui/font';
-import 'ngui/reader';
-import { GUIApplication, Root } from 'ngui';
+import util from 'ngui/util';
+import * as font from 'ngui/font';
+import * as reader from 'ngui/reader';
+import { GUIApplication, Root, _CVD } from 'ngui';
 import { NavPageCollection } from 'ngui/nav';
 import Index from './pages/index';
 import WalletDetails from './pages/wallet_details';
@@ -46,8 +46,8 @@ new GUIApplication({
 	multisample: 4,
 	width: 375,
 	height: 700,
-	fullScreen: util.options.full_screen || 0,
-	enableTouch: 1,
+	fullScreen: !!util.options.full_screen,
+	enableTouch: true,
 	background: 0xffffff,
 	title: 'BITWallets',
 }).start(

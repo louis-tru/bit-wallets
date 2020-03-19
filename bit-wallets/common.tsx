@@ -28,9 +28,11 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {CSS,atomPixel as px} from 'ngui';
+import ngui from 'ngui';
 
-CSS({
+const px = ngui.atomPixel;
+
+ngui.css({
 	'.G_line': {
 		width: '100%',
 		height: px,
