@@ -28,54 +28,47 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Button, Input } from 'ngui';
-import 'ngui/storage';
-import { alert } from 'ngui/dialog';
+import { Div, Text, _CVD, default as ngui } from 'ngui';
+import { Stepper } from 'ngui/stepper';
 import { Mynavpage } from './public';
+import { Event } from 'ngui/event';
 
-var resolve = require.resolve;
+const resolve = require.resolve;
 
-const key = 'test';
+ngui.css({
+	'.strpper_page': {
+		width: 'full',
+	},
+	'.strpper_page .item': {
+		width: 'full',
+		borderBottom: `${ngui.atomPixel} #ccc`,
+	},
+	'.strpper_page .text': {
+		width: '140!',
+		margin: 13,
+	},
+})
 
-function keyenter(evt) {
-	evt.sender.blur();
+function change_handle(evt: Event<void, Stepper>) {
+	var stepper = evt.sender as Stepper;
+	(stepper.domAs().prev as Text).value = String(stepper.value);
 }
 
-function Get(evt) {
-	var val = storage.get(key);
-	if ( val ) {
-		alert(storage.get(key));
-	} else {
-		alert('No local storage data！');
-	}
-}
-
-function Set(evt) {
-	storage.set(key, evt.sender.owner.IDs.input.value);
-	alert('Save local data OK.');
-}
-
-function Del(evt) {
-	storage.del(key);
-	alert('Delete local data OK.');
-}
-
-function Clear(evt) {
-	storage.clear(key);
-	alert('Delete All local data OK.');
-}
-
-export const vx = ()=>(
-	<Mynavpage title="Local Storage" source=resolve(__filename)>
-		<Div width="full">
-			<Input class="input" id="input" 
-				placeholder="Please enter value .." 
-				value="Hello."
-				returnType="done" onKeyEnter=keyenter />
-			<Button class="long_btn" onClick=Get>Get</Button>
-			<Button class="long_btn" onClick=Set>Set</Button>
-			<Button class="long_btn" onClick=Del>Del</Button>
-			<Button class="long_btn" onClick=Clear>Clear</Button>
+export default ()=>(
+	<Mynavpage title="Stepper" source={resolve(__filename)}>
+		<Div width="full" class="strpper_page">
+			<Div class="item">
+				<Text class="text" value="10" />
+				<Stepper onChange={change_handle} style={{margin:10}} value={10} />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="6" />
+				<Stepper onChange={change_handle} style={{margin:10}} max={10} min={5} value={6} />
+			</Div>
+			<Div class="item">
+				<Text class="text" value="0" />
+				<Stepper onChange={change_handle} style={{margin:10}} step={0.1} />
+			</Div>
 		</Div>
 	</Mynavpage>
 )

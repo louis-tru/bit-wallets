@@ -1,3 +1,4 @@
 @projectName bit-wallets
 @apps 
-  bit-wallets 
+	bit-wallets 
+	examples

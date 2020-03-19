@@ -28,61 +28,36 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Text, CSS, atomPixel } from 'ngui';
-import { Switch, Checkbox } from 'ngui/checkbox';
+import { Text, Scroll, _CVD } from 'ngui';
 import { Mynavpage } from './public';
 
 var resolve = require.resolve;
 
+export default ()=>{
 
-CSS({
-	'.checkbox_page': {
-		width: 'full',
-	},
-	'.checkbox_page .item': {
-		width: 'full',
-		borderBottom: `${atomPixel} #ccc`,
-	},
-	'.checkbox_page .text': {
-		width: '100!',
-		margin: 13,
-	},
-})
+	var code = `Ngui
+	===============
+	
+	Used C/C++/OpenGL/javascript to implement a GUI typesetting display engine and cross platform GUI application development framework
+	Goal: developing GUI applications on this basis can take into account both the simplicity and speed of developing WEB applications, as well as the performance and experience of Native applications.
+	
+	使用C/C++/OpenGL/javascript实现的一个GUI排版显示引擎与跨平台GUI应用开发框架
+	目标：在此基础上开发GUI应用程序可兼顾开发WEB应用程序的简单与速度同时拥有Native应用程序的性能与体验.
+	
+	Ngui Source 
+	===============
+	https://github.com/louis-tru/ngui.git
+	
+	Support
+	===============
+	http://ngui.fun
+	louistru@hotmail.com`;
 
-function change_handle(evt) {
-	var checkbox = evt.sender;
-	var str = checkbox.selected ? 'YES' : 'NO';
-	str += checkbox.disable ? ',Disable' : '';
-	checkbox.dom.prev.value = str;
-}
-
-export const vx = ()=>(
-	<Mynavpage title="Checkbox" source=resolve(__filename)>
-		<Div width="full" class="checkbox_page">
-			<Div class="item">
-				<Text class="text" value="YES" />
-				<Switch onChange=change_handle style={margin:10} selected=1 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="NO,Disable" />
-				<Switch onChange=change_handle style={margin:10} disable=1 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="NO" />
-				<Switch onChange=change_handle style={margin:10} />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="YES" />
-				<Checkbox onChange=change_handle style={margin:13} selected=1 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="YES,Disable" />
-				<Checkbox onChange=change_handle style={margin:13} disable=1 selected=1 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="NO" />
-				<Checkbox onChange=change_handle style={margin:13} />
-			</Div>
-		</Div>
-	</Mynavpage>
-)
+	return (
+		<Mynavpage title="About" source={resolve(__filename)}>
+			<Scroll width="full" height="full">
+				<Text width="full" margin={10} value={code} />
+			</Scroll>
+		</Mynavpage>
+	);
+};

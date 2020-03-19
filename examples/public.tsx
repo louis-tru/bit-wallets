@@ -30,38 +30,15 @@
 
 import { NavPage } from 'ngui/nav';
 import { 
-	ViewController, Button, CSS, Hybrid,
-	Text, atomPixel as px, 
-	Indep, Panel, Scroll, ngui
+	ViewController, Button, Hybrid,
+	Text, Indep, default as ngui, _CVD
 } from 'ngui';
-import 'ngui/util';
+import {GUIClickEvent} from 'ngui/event';
 
-var resolve = require.resolve;
+const px = ngui.atomPixel;
+const resolve = require.resolve;
 
-// CSS(<Style>
-//   .long_btn {
-//     margin: 10;
-//     margin_bottom: 0;
-//     width: full;
-//     height: 36;
-//     text_line_height: 36;
-//     text_color: #0079ff;
-//     border_radius: 8;
-//     border: ${px} #0079ff;
-//   }
-//   .long_btn2 {
-//     margin: 10;
-//     margin_bottom: 0;
-//     width: full;
-//     height: 36
-//     text_line_height: 36;
-//     text_color: #fff;
-//     border_radius: 8;
-//     border: ${px} #fff;
-//   }
-// </Style>);
-
-CSS({
+ngui.css({
 	
 	'.long_btn': {
 		margin: 10,
@@ -122,32 +99,34 @@ CSS({
 })
 
 export class NavButton extends ViewController {
-	
-	render(...vdoms) {
+
+	next?: any;
+
+	render(...vdoms: any[]) {
 		//util.log('---------------------', px);
 		return (
 			<Button
 				onClick="handle_click"
 				class="next_btn"
 				textColor="#0079ff"
-				defaultHighlighted=0
-				borderBottom=`${px} #c8c7cc`>
-				<Hybrid marginLeft=16 marginRight=50>{vdoms}</Hybrid>
-				<Indep x=-10 alignX="right" alignY="center">
+				defaultHighlighted={0}
+				borderBottom={`${px} #c8c7cc`}>
+				<Hybrid marginLeft={16} marginRight={50}>{vdoms}</Hybrid>
+				<Indep x={-10} alignX="right" alignY="center">
 					<Text value="\uedbe" textFamily="icomoon-ultimate" textColor="#aaa" />
 				</Indep>
 			</Button>
 		);
 	}
-	
-	handle_click(evt) {
+
+	handle_click(evt: GUIClickEvent) {
 		if (!this.next) return;
 		var next = this.next();
 		if ( ViewController.typeOf(next, Mynavpage) ) {
 			var ctr = this.owner;
 			while (ctr) {
 				if ( ctr instanceof Mynavpage ) {
-					ctr.collection.push(next, 1); break;
+					ctr.collection.push(next, true); break;
 				}
 				ctr = ctr.owner;
 			}
@@ -158,12 +137,10 @@ export class NavButton extends ViewController {
 
 export class Page extends NavPage {
 	source = resolve(__filename);
-
 	constructor() {
 		super();
 		this.backgroundColor = '#f8f8f8';
 	}
-
 }
 
 export var Navbutton = NavButton;

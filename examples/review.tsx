@@ -28,46 +28,30 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Text, CSS, atomPixel } from 'ngui';
-import { Stepper } from 'ngui/stepper';
-import { Mynavpage } from './public';
+import { Scroll, Text, _CVD } from 'ngui';
+import { Mynavpage, Page } from './public';
+import { Navbar } from 'ngui/nav';
+import * as reader from 'ngui/reader';
+import {Event} from 'ngui/event';
 
-var resolve = require.resolve;
-
-CSS({
-	'.strpper_page': {
-		width: 'full',
-	},
-	'.strpper_page .item': {
-		width: 'full',
-		borderBottom: `${atomPixel} #ccc`,
-	},
-	'.strpper_page .text': {
-		width: '140!',
-		margin: 13,
-	},
-})
-
-function change_handle(evt) {
-	var stepper = evt.sender;
-	stepper.dom.prev.value = stepper.value;
+function foreground(evt: Event<void, Page>) {
+	var navpage = evt.sender;
+	navpage.title = 'Source';
+	var text = reader.readFileSync((navpage.prevPage as Page).source, 'utf8');
+	navpage.find<Text>('text').value = text;
 }
 
-export const vx = ()=>(
-	<Mynavpage title="Stepper" source=resolve(__filename)>
-		<Div width="full" class="strpper_page">
-			<Div class="item">
-				<Text class="text" value="10" />
-				<Stepper onChange=change_handle style={margin:10} value=10 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="6" />
-				<Stepper onChange=change_handle style={margin:10} max=10 min=5 value=6 />
-			</Div>
-			<Div class="item">
-				<Text class="text" value="0" />
-				<Stepper onChange=change_handle style={margin:10} step=0.1 />
-			</Div>
-		</Div>
+export default ()=>(
+	<Mynavpage 
+		navbar={<Navbar
+			backgroundColor="#333"
+			backTextColor="#fff"
+			titleTextColor="#fff"
+			hidden={true} />
+		}
+		backgroundColor="#333" onForeground={foreground}>
+		<Scroll width="full" height="full" bounceLock={0}>
+			<Text width="full" id="text" textColor="#fff" textSize={12} margin={5} />
+		</Scroll>
 	</Mynavpage>
 )

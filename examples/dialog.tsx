@@ -28,28 +28,49 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Scroll, Text } from 'ngui';
+import { Div, Button, TextNode, _CVD } from 'ngui';
 import { Mynavpage } from './public';
-import { Toolbar } from 'ngui/nav';
-import 'ngui/reader';
+import * as dialog from 'ngui/dialog';
 
-function foreground(evt) {
-	var navpage = evt.sender;
-	navpage.title = 'Source';
-	var text = reader.readFileSync(navpage.prevPage.source, 'utf8');
-	navpage.IDs.text.value = text;
+const resolve = require.resolve;
+
+function alert() {
+	dialog.alert('Hello alert.');
 }
 
-export default const vx = ()=>(
-	<Mynavpage 
-		navbar.backgroundColor="#333"
-		navbar.backTextColor="#fff" 
-		navbar.titleTextColor="#fff"
-		toolbar.backgroundColor="#333"
-		toolbar.hidden=true 
-		backgroundColor="#333" onForeground=foreground>
-		<Scroll width="full" height="full" bounceLock=0>
-			<Text width="full" id="text" textColor="#fff" textSize=12 margin=5 />
-		</Scroll>
+function confirm() {
+	dialog.confirm('Hello Confirm.', (ok)=>{
+		if ( ok ) dialog.alert('OK');
+	});
+}
+
+function prompt() {
+	dialog.prompt('Hello Prompt.', (ok, text)=>{
+		if ( ok ) {
+			dialog.alert(text);
+		}
+	});
+}
+
+function custom() {
+	dialog.show('蓝牙已关闭', 
+	'CarPlay将只能通过USB使用。您希望同时启用无线CarPlay吗？', 
+	[<TextNode textStyle='bold' value="仅USB"/>, '无线蓝牙'], (num)=>{
+		if ( num == 0 ) {
+			dialog.alert('仅USB');
+		} else {
+			dialog.alert('无线蓝牙');
+		}
+	});
+}
+
+export default ()=>(
+	<Mynavpage title="Dialog" source={resolve(__filename)}>
+		<Div width="full">
+			<Button class="long_btn" onClick={alert}>Alert</Button>
+			<Button class="long_btn" onClick={confirm}>Confirm</Button>
+			<Button class="long_btn" onClick={prompt}>Prompt</Button>
+			<Button class="long_btn" onClick={custom}>Custom</Button>
+		</Div>
 	</Mynavpage>
 )

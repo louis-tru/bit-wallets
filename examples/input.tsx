@@ -28,75 +28,59 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Button } from 'ngui';
-import { AudioPlayer, Video } from 'ngui/media';
+import { Div, Button, Text, Input, Textarea, default as ngui, _CVD, View } from 'ngui';
 import { Mynavpage } from './public';
-import * as aaaa from 'ngui/path';
+import { GUIClickEvent } from 'ngui/event';
 
-// const src_720 = 'http://ngui.fun/media/2017-09-11_15_41_19.mp4';
-const src_720 = 'http://ngui.fun/media/piper720p.mp4';
-const audio_src = 'http://ngui.fun/media/all_we_know.mp3';
+const resolve = require.resolve;
 
-var resolve = require.resolve;
-
-var audio_player = null;
-
-function PlayVideo(evt) {
-	StopAudio(evt);
-	var v = evt.sender.owner.IDs.video;
-	v.src = src_720;
-	v.start();
+function start_input(evt: GUIClickEvent) {
+	evt.sender.ownerAs().find('input1').focus();
 }
 
-function PlayAudio(evt) {
-	StopVideo(evt);
-	if ( !audio_player ) {
-		audio_player = new AudioPlayer();
-	}
-	audio_player.src = audio_src;
-	audio_player.start();
+function end_input(evt: GUIClickEvent) {
+	(ngui.app.focusView as View).blur();
 }
 
-function StopVideo(evt) {
-	evt.sender.owner.IDs.video.stop();
-}
-
-function StopAudio(evt) {
-	if ( audio_player ) {
-		audio_player.stop();
-		audio_player = null;
-	}
-}
-
-function Stop(evt) {
-	StopVideo(evt);
-	StopAudio(evt);
-}
-
-function Seek(evt) {
-	if ( audio_player ) {
-		audio_player.seek(10000); // 10s
-	} else {
-		evt.sender.owner.IDs.video.seek(100000); // 100s
-	}
-}
-
-export const vx = ()=>(
-	<Mynavpage title="Media" source=resolve(__filename) onRemove=StopAudio>
+export default ()=>(
+	<Mynavpage title="Input" source={resolve(__filename)}>
 		<Div width="full">
-			<Button class="long_btn" onClick=PlayVideo>Play Video</Button>
-			<Button class="long_btn" onClick=PlayAudio>Play Audio</Button>
-			<Button class="long_btn" onClick=Stop>Stop</Button>
+			<Text margin={10} origin="10 10" textBackgroundColor="#000" textColor="#fff" value="Examples Input" />
+			
+			<Input id="input0" margin={10}
+				width="full"
+				height={30}
+				backgroundColor="#eee"
+				type="phone"
+				returnType="next"
+				borderRadius={8} placeholder="Please enter.." />
 
-			<Video 
-				id="video" 
-				marginTop=10
-				borderRadius=20 
-				_border="8 #f00" 
-				clip=false
-				width="full" 
-				backgroundColor="#000" 
-			/>
+			<Input id="input1" margin={10}
+				width="full"
+				textColor="#fff"
+				backgroundColor="#000"
+				height={30}
+				border="0 #f00"
+				borderRadius={0}
+				type="decimal"
+				textAlign="center"
+				placeholder="Please enter.." value="Hello" />
+			
+			<Textarea margin={10} origin="50 50"
+				width="full"
+				height={120}
+				textColor="#000"
+				border="0 #aaa"
+				backgroundColor="#eee"
+				borderRadius={8}
+				returnType="next"
+				placeholder="Please enter.."
+				textSize={14}
+				textAlign="center" />
+				
+			<Button class="long_btn" onClick={end_input}>Done</Button>
+			<Button class="long_btn" onClick={start_input}>Input</Button>
+				
 		</Div>
 	</Mynavpage>
 )

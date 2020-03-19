@@ -28,72 +28,73 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Button, Input } from 'ngui';
-import 'ngui/fs';
-import 'ngui/path';
+import { Div, Button, Input, _CVD } from 'ngui';
+import util from 'ngui/util';
+import * as http from 'ngui/http';
 import { alert } from 'ngui/dialog';
 import { Mynavpage } from './public';
+import { GUIClickEvent, GUIKeyEvent } from 'ngui/event';
+import * as buffer from 'ngui/buffer';
 
-var resolve = require.resolve;
+const resolve = require.resolve;
 
-const filename = path.documents('test.txt');
-
-fs.mkdirpSync(path.dirname(filename));
-
-function WriteFile(evt) {
-	console.log('------------', filename);
-	fs.writeFile(filename, evt.sender.owner.IDs.input.value, function() {
-		alert('Write file OK.');
-	}.catch(err=>{
-		alert(err.message + ', ' + err.code);
-	}));
+function url(evt: GUIClickEvent) {
+	return evt.sender.ownerAs().find<Input>('input').value;
 }
 
-function WriteFileSync(evt) {
+function Get(evt: GUIClickEvent) {
+	http.get(url(evt)).then(function({ data }) {
+		var content = buffer.convertString(data, 'utf8');
+		alert(content.substr(0, 200).trim() + '...');
+	}).catch(function(err) {
+		alert(err.message);
+	});
+}
+
+function Post(evt: GUIClickEvent) {
+	http.post(url(evt), 'post data').then(function({ data }) {
+		alert(buffer.convertString(data, 'utf8').substr(0, 200).trim() + '...');
+	}).catch(function(err) {
+		alert(err.message);
+	});
+}
+
+function GetSync(evt: GUIClickEvent) {
 	try {
-		var txt = evt.sender.owner.IDs.input.value;
-		var r = fs.writeFileSync(filename, txt);
-		console.log(r);
-		alert('Write file OK.');
+		alert(buffer.convertString(http.getSync(url(evt)), 'utf8').substr(0, 200).trim() + '...');
 	} catch (err) {
-		alert(err.message + ', ' + err.code);
+		alert(err.message);
 	}
 }
 
-function ReadFile(evt) {
-	console.log('------------', filename);
-	fs.readFile(filename, function(buf) {
-		alert(buf.toString('utf-8'));
-	}.catch(err=>{
-		alert(err.message + ', ' + err.code);
-	}));
-}
-
-function Remove(evt) {
+function PostSync(evt: GUIClickEvent) {
 	try {
-		var a = fs.removerSync(filename);
-		alert('Remove file OK. ' + a);
+		alert(buffer.convertString(http.postSync(url(evt), 'post data'), 'utf8').substr(0, 200).trim() + '...');
 	} catch (err) {
-		alert(err.message + ', ' + err.code);
+		alert(err.message);
 	}
 }
 
-function keyenter(evt) {
+function keyenter(evt: GUIKeyEvent) {
 	evt.sender.blur();
 }
 
-export const vx = ()=>(
-	<Mynavpage title="File System" source=resolve(__filename)>
+//console.log('-------------', String(util.garbage_collection), typeof util.garbage_collection);
+
+export default ()=>(
+	<Mynavpage title="Http" source={resolve(__filename)}>
 		<Div width="full">
 			<Input class="input" id="input" 
-				placeholder="Please enter write content.."
-				value="Hello."
-				returnType="done" onKeyEnter=keyenter />
-			<Button class="long_btn" onClick=WriteFile>WriteFile</Button>
-			<Button class="long_btn" onClick=WriteFileSync>WriteFileSync</Button>
-			<Button class="long_btn" onClick=ReadFile>ReadFile</Button>
-			<Button class="long_btn" onClick=ReadFile>ReadFileSync</Button>
-			<Button class="long_btn" onClick=Remove>Remove</Button>
+				placeholder="Please enter http url .." 
+				value="https://github.com/"
+				//value="http://192.168.1.11:1026/Tools/test_timeout?1"
+				returnType="done" onKeyEnter={keyenter} />
+			<Button class="long_btn" onClick={Get}>Get</Button>
+			<Button class="long_btn" onClick={Post}>Post</Button>
+			<Button class="long_btn" onClick={GetSync}>GetSync</Button>
+			<Button class="long_btn" onClick={PostSync}>PostSync</Button>
+			<Button class="long_btn" onClick={util.gc}>GC</Button>
+			<Button class="long_btn" onClick={util.exit}>Exit</Button>
 		</Div>
 	</Mynavpage>
 )

@@ -28,29 +28,45 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Scroll, Clip, Text, ngui } from 'ngui';
+import { Scroll, Div, Clip, Text, _CVD } from 'ngui';
 import { Navbutton, Mynavpage } from './public';
-import './checkbox';
-import './overlay';
-import './stepper';
-import './nav';
-import './dialog';
+import components from './components';
+import input from './input';
+import icons from './icons';
+import media from './media';
+import action from './action';
+import fs from './fs';
+import http from './http';
+import zlib from './zlib';
+import storage from './storage';
 
-var resolve = require.resolve;
+const resolve = require.resolve;
 
-export const vx = ()=>(
-	<Mynavpage title="Components" source=resolve(__filename)>
-		<Scroll width="full" height="full" bounceLock=0>
-		
-			<Text class="category_title" value="Components." />
+export default ()=>(
+	<Mynavpage title="Examples" source={resolve(__filename)}>
+
+		<Scroll width="full" height="full" bounceLock={0}>
+
+			<Text class="category_title" value="GUI." />
 			<Clip class="category">
-				<Navbutton next=nav.vx>Nav</Navbutton>
-				<Navbutton next=checkbox.vx>Checkbox</Navbutton>
-				<Navbutton next=stepper.vx>Stepper</Navbutton>
-				<Navbutton next=overlay.vx>Overlay</Navbutton>
-				<Navbutton next=dialog.vx>Dialog</Navbutton>
+				<Navbutton next={components} id="btn0">Components</Navbutton>
+				<Navbutton next={media}>Multi-Media</Navbutton>
+				<Navbutton next={input}>Input</Navbutton>
+				<Navbutton next={icons}>Icons</Navbutton>
+				<Navbutton next={action}>Action</Navbutton>
 			</Clip>
 			
+			<Text class="category_title" value="Basic util." />
+			<Clip class="category">
+				<Navbutton next={fs}>File System</Navbutton>
+				<Navbutton next={http}>Http</Navbutton>
+				{/* <Navbutton next={zlib}>Zlib</Navbutton> */}
+				<Navbutton next={storage}>Local Storage</Navbutton>
+			</Clip>
+
+			<Div height={15} width="full" />
 		</Scroll>
+
 	</Mynavpage>
-);
+)
+

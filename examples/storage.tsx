@@ -28,71 +28,55 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Button, Input } from 'ngui';
-import 'ngui/util';
-import 'ngui/http';
+import { Div, Button, Input, _CVD } from 'ngui';
+import * as storage from 'ngui/storage';
 import { alert } from 'ngui/dialog';
 import { Mynavpage } from './public';
+import {GUIKeyEvent,GUIClickEvent} from 'ngui/event';
 
 var resolve = require.resolve;
 
-function url(evt) {
-	return evt.sender.owner.IDs.input.value;
-}
+const key = 'test';
 
-function Get(evt) {
-	http.get(url(evt), function({ data }) {
-		var content = data.toString('utf-8');
-		alert(content.substr(0, 200).trim() + '...');
-	}.catch(function(err) {
-		alert(err.message);
-	}));
-}
-
-function Post(evt) {
-	http.post(url(evt), 'post data', function({ data }) {
-		alert(data.toString('utf-8').substr(0, 200).trim() + '...');
-	}.catch(function(err) {
-		alert(err.message);
-	}));
-}
-
-function GetSync(evt) {
-	try {
-		alert(http.getSync(url(evt)).toString('utf-8').substr(0, 200).trim() + '...');
-	} catch (err) {
-		alert(err.message);
-	}
-}
-
-function PostSync(evt) {
-	try {
-		alert(http.postSync(url(evt), 'post data').toString('utf-8').substr(0, 200).trim() + '...');
-	} catch (err) {
-		alert(err.message);
-	}
-}
-
-function keyenter(evt) {
+function keyenter(evt: GUIKeyEvent) {
 	evt.sender.blur();
 }
 
-//console.log('-------------', String(util.garbage_collection), typeof util.garbage_collection);
+function Get(evt: GUIClickEvent) {
+	var val = storage.get(key);
+	if ( val ) {
+		alert(storage.get(key));
+	} else {
+		alert('No local storage data！');
+	}
+}
 
-export const vx = ()=>(
-	<Mynavpage title="Http" source=resolve(__filename)>
+function Set(evt: GUIClickEvent) {
+	storage.set(key, evt.sender.ownerAs().find<Input>('input').value);
+	alert('Save local data OK.');
+}
+
+function Del(evt: GUIClickEvent) {
+	storage.del(key);
+	alert('Delete local data OK.');
+}
+
+function Clear(evt: GUIClickEvent) {
+	storage.clear();
+	alert('Delete All local data OK.');
+}
+
+export default ()=>(
+	<Mynavpage title="Local Storage" source={resolve(__filename)}>
 		<Div width="full">
 			<Input class="input" id="input" 
-				placeholder="Please enter http url .." 
-				value="https://github.com/"
-				//value="http://192.168.1.11:1026/Tools/test_timeout?1"
-				returnType="done" onKeyEnter=keyenter />
-			<Button class="long_btn" onClick=Get>Get</Button>
-			<Button class="long_btn" onClick=Post>Post</Button>
-			<Button class="long_btn" onClick=GetSync>GetSync</Button>
-			<Button class="long_btn" onClick=PostSync>PostSync</Button>
-			<Button class="long_btn" onClick=util.garbageCollection>GC</Button>
-			<Button class="long_btn" onClick=util.exit>Exit</Button>
+				placeholder="Please enter value .." 
+				value="Hello."
+				returnType="done" onKeyEnter={keyenter} />
+			<Button class="long_btn" onClick={Get}>Get</Button>
+			<Button class="long_btn" onClick={Set}>Set</Button>
+			<Button class="long_btn" onClick={Del}>Del</Button>
+			<Button class="long_btn" onClick={Clear}>Clear</Button>
 		</Div>
 	</Mynavpage>
 )
