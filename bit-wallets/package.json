@@ -4,6 +4,10 @@
 	"id": "org.ngui.bit-wallets",
 	"main": "main.jsx",
 	"version": "1.0.0",
+	"skip": ["pages"],
+	"dependencies": {
+		"dncc": "~0.1.5"
+	},
 	"_dependencies": {
 		"nxkit": "~0.10.35",
 		"safe-tx": "~0.1.12",

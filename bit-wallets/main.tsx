@@ -33,14 +33,14 @@ import * as font from 'ngui/font';
 import * as reader from 'ngui/reader';
 import { GUIApplication, Root, _CVD } from 'ngui';
 import { NavPageCollection } from 'ngui/nav';
-import Index from './pages/index';
-import WalletDetails from './pages/wallet_details';
-import password_prompt from './pages/password_prompt';
+// import Index from './pages/index';
+// import WalletDetails from './pages/wallet_details';
+// import password_prompt from './pages/password_prompt';
 
 import './cn';
 import './common';
 
-import Test from './pages/test';
+// import Test from './pages/test';
 
 new GUIApplication({
 	multisample: 4,
@@ -53,7 +53,7 @@ new GUIApplication({
 }).start(
 	<Root>
 		<NavPageCollection id="nav">
-			<Index />
+			{/* <Index /> */}
 			{/* <Test toolbar.hidden=true title="Test" /> */}
 			{/* <WalletDetails toolbar.hidden=true title="ETH-Wallet" /> */}
 			{/* <password_prompt prompt="123456" /> */}
