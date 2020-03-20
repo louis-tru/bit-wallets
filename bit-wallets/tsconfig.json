@@ -33,6 +33,5 @@
 		".svn",
 		"node_modules",
 		"_.js",
-		"pages",
 	]
 }

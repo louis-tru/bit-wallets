@@ -28,17 +28,20 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Hybrid, Button, 
+import { Hybrid, Button, 
 	TextNode, Text, Div, 
-	atomPixel as px,
-	Textarea, Input, ngui,
+	Textarea, Input, default as ngui, _CVD
 } from 'ngui';
 import { NavPage, Toolbar } from 'ngui/nav';
 import { alert } from 'ngui/dialog';
 import Tabs, {TabPanel} from '../tabs';
 import { Btn } from '../btns';
+import {prop} from 'ngui/ctr';
+import {Event} from 'ngui/event';
 
-CSS({
+const px = ngui.atomPixel;
+
+ngui.css({
 	'.wi': {
 		width: "100%",
 	},
@@ -124,6 +127,9 @@ CSS({
 
 // Keystore
 class Keystore extends TabPanel {
+
+	@prop showPw = false;
+
 	render() {
 		return super.render(
 			<Div class="wi">
@@ -132,11 +138,11 @@ class Keystore extends TabPanel {
 				</Div>
 				<Div class="box1">
 					<Div class="div">
-						<Textarea class="in1" height=110 placeholder="Keystore 文件内容" />
+						<Textarea class="in1" height={110} placeholder="Keystore 文件内容" />
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 security=(!this.modle.showPw) placeholder="钱包密码" />
-						<Button class="btn" onClick="m_handle_click1">{this.modle.showPw?'\uecb1':'\uecb2'}</Button>
+						<Input class="in2" textMargin={0} security={!this.showPw} placeholder="钱包密码" />
+						<Button class="btn" onClick="m_handle_click1">{this.showPw?'\uecb1':'\uecb2'}</Button>
 					</Div>
 				</Div>
 				<Div class="btn_p">
@@ -145,10 +151,10 @@ class Keystore extends TabPanel {
 			</Div>
 		);
 	}
-	m_handle_click1() {
-		this.modle = {showPw:!this.modle.showPw};
+	private m_handle_click1() {
+		this.showPw = !this.showPw;
 	}
-	m_handle_click2() {
+	private m_handle_click2() {
 		// TODO ...
 		alert('导入');
 	}
@@ -156,6 +162,7 @@ class Keystore extends TabPanel {
 
 // 助记词
 class Auxiliaries extends TabPanel {
+	@prop showPw = false;
 	render() {
 		return super.render(
 			<Div class="wi">
@@ -164,21 +171,21 @@ class Auxiliaries extends TabPanel {
 				</Div>
 				<Div class="box1">
 					<Div class="div">
-						<Textarea class="in1" height=95 placeholder="输入助记词，用空格分隔" />
+						<Textarea class="in1" height={95} placeholder="输入助记词，用空格分隔" />
 					</Div>
 					<Div class="item">
 						<Text class="txt" value="设置密码" />
 						<Button class="btn_0" onClick="m_handle_click3">\ued63</Button>
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 security=(!this.modle.showPw) placeholder="钱包密码" />
+						<Input class="in2" textMargin={0} security={!this.showPw} placeholder="钱包密码" />
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 security=(!this.modle.showPw) placeholder="重复输入密码" />
-						<Button class="btn" onClick="m_handle_click1">{this.modle.showPw?'\uecb1':'\uecb2'}</Button>
+						<Input class="in2" textMargin={0} security={!this.showPw} placeholder="重复输入密码" />
+						<Button class="btn" onClick="m_handle_click1">{this.showPw?'\uecb1':'\uecb2'}</Button>
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 placeholder="密码提示信" />
+						<Input class="in2" textMargin={0} placeholder="密码提示信" />
 					</Div>
 				</Div>
 				<Div class="btn_p">
@@ -187,20 +194,21 @@ class Auxiliaries extends TabPanel {
 			</Div>
 		);
 	}
-	m_handle_click1() {
-		this.modle = {showPw:!this.modle.showPw};
+	private m_handle_click1() {
+		this.showPw = !this.showPw;
 	}
-	m_handle_click2() {
+	private m_handle_click2() {
 		// TODO ...
 		alert('导入');
 	}
-	m_handle_click3() {
+	private m_handle_click3() {
 		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
 	}
 }
 
 // 私钥
 class PrivateKey extends TabPanel {
+	@prop showPw = false;
 	render() {
 		return super.render(
 			<Div class="wi">
@@ -209,21 +217,21 @@ class PrivateKey extends TabPanel {
 				</Div>
 				<Div class="box1">
 					<Div class="div">
-						<Textarea class="in1" height=95 placeholder="输入明文私钥" />
+						<Textarea class="in1" height={95} placeholder="输入明文私钥" />
 					</Div>
 					<Div class="item">
 						<Text class="txt" value="设置密码" />
 						<Button class="btn_0" onClick="m_handle_click3">\ued63</Button>
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 security=(!this.modle.showPw) placeholder="钱包密码" />
+						<Input class="in2" textMargin={0} security={!this.showPw} placeholder="钱包密码" />
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 security=(!this.modle.showPw) placeholder="重复输入密码" />
-						<Button class="btn" onClick="m_handle_click1">{this.modle.showPw?'\uecb1':'\uecb2'}</Button>
+						<Input class="in2" textMargin={0} security={!this.showPw} placeholder="重复输入密码" />
+						<Button class="btn" onClick="m_handle_click1">{this.showPw?'\uecb1':'\uecb2'}</Button>
 					</Div>
 					<Div class="div2">
-						<Input class="in2" textMargin=0 placeholder="密码提示信" />
+						<Input class="in2" textMargin={0} placeholder="密码提示信" />
 					</Div>
 				</Div>
 				<Div class="btn_p">
@@ -232,14 +240,14 @@ class PrivateKey extends TabPanel {
 			</Div>
 		);
 	}
-	m_handle_click1() {
-		this.modle = {showPw:!this.modle.showPw};
+	private m_handle_click1() {
+		this.showPw = !this.showPw;
 	}
-	m_handle_click2() {
+	private m_handle_click2() {
 		// TODO ...
 		alert('导入');
 	}
-	m_handle_click3() {
+	private m_handle_click3() {
 		alert({title:'设置密码说明', msg:'如果要在导入的同时修改钱包密码，请在输入框内重复输入新密码，旧密码将在导入钱包后失效。'});
 	}
 }
@@ -248,17 +256,18 @@ class PrivateKey extends TabPanel {
  * @class Import
  */
 export default class Import extends NavPage {
+	@prop type = 0;
 	constructor() {
 		super();
 		this.toolbar = (
 			<Toolbar>
 				<Hybrid textAlign="center" width="100%" height="100%">
 					<Button
-						height=22 
+						height={22} 
 						margin="auto"
-						textSize=14 
+						textSize={14} 
 						textColor="#0079ff"
-						onClick=(e=>this.m_handle_click_1()) 
+						onClick={()=>this.m_handle_click_1()}
 					><TextNode id="txt" value="了解Keystore" /></Button>
 				</Hybrid>
 			</Toolbar>
@@ -273,8 +282,8 @@ export default class Import extends NavPage {
 			</Tabs>
 		);
 	}
-	m_handle_click_1() {
-		var tab = this.IDs.tabs.tab;
+	private m_handle_click_1() {
+		var tab = this.find<Tabs>('tabs').tab;
 		if (tab == 0) {
 			ngui.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-keystore?locale=zh-CN');
 		} else if (tab == 1) {
@@ -283,9 +292,7 @@ export default class Import extends NavPage {
 			ngui.app.openUrl('https://mainnet-bizapi.token.im/support/questions/what-privatekey?locale=zh-CN');
 		}
 	}
-	m_handle_switch(e) {
-		this.toolbar.IDs.txt.value = ['了解Keystore','了解助记词','了解私钥'][e.data];
+	private m_handle_switch(e: Event<number>) {
+		this.toolbar.find<TextNode>('txt').value = ['了解Keystore','了解助记词','了解私钥'][e.data];
 	}
 }
-
-Import.defineProps(['type']);

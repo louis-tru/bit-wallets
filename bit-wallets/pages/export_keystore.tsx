@@ -28,17 +28,19 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { CSS, Text, Div, Image,
-	atomPixel as px, Scroll,
+import {
+	Text, Div, Image, Scroll, default as ngui, _CVD
 } from 'ngui';
-import { NavPage, Toolbar } from 'ngui/nav';
+import { NavPage } from 'ngui/nav';
 import Tabs, {TabPanel} from '../tabs';
 import {Btn} from '../btns';
 import {showTip} from '../tip';
+import {prop} from 'ngui/ctr';
 
-var {resolve} = require;
+const px = ngui.atomPixel;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.ex': {
 		width: "100%",
 	},
@@ -137,6 +139,9 @@ class Keystore extends TabPanel {
 }
 
 class QRCode extends TabPanel {
+
+	@prop showQr = false;
+
 	render() {
 		return super.render(
 			<Div class="ex">
@@ -149,16 +154,16 @@ class QRCode extends TabPanel {
 					</Div>
 				</Div>
 				{
-					this.modle.showQr?
+					this.showQr?
 					<Div class="box3">
-						<Image class="img1" src=resolve('../img/qr.png') />
+						<Image class="img1" src={resolve('../img/qr.png')} />
 					</Div>:
 					<Div class="box3">
-						<Image class="img2" src=resolve('../img/icon-4.png') />
+						<Image class="img2" src={resolve('../img/icon-4.png')} />
 					</Div>
 				}
 				{
-					!this.modle.showQr?
+					!this.showQr?
 					<Div class="btn_1">
 						<Btn onClick="m_handle_click2">显示二维码</Btn>
 					</Div>:null
@@ -166,10 +171,11 @@ class QRCode extends TabPanel {
 			</Div>
 		);
 	}
+
 	m_handle_click2() {
-		if (!this.modle.showQr)
-			this.setModle({showQr: 1});
+		this.showQr = !this.showQr;
 	}
+
 }
 
 /**

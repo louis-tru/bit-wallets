@@ -29,17 +29,19 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, Div, 
+	Div, _CVD, default as ngui,
 	Text, TextNode, 
 	Button, Image, Indep, 
 } from 'ngui';
 import { NavPage, Navbar } from 'ngui/nav';
 import {alert} from 'ngui/dialog';
+import {prop} from 'ngui/ctr';
+import {GUIClickEvent} from 'ngui/event';
 import {showTip} from '../tip';
 
 const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.qrc': {
 		width: 317.5,
 		height: 317.5,
@@ -111,7 +113,7 @@ CSS({
 
 class MyNavbar extends Navbar {
 
-	m_share(e) {
+	m_share(e: GUIClickEvent) {
 		alert('分享');
 	}
 
@@ -119,8 +121,8 @@ class MyNavbar extends Navbar {
 		// \uec7f
 		// \uea81
 		return super.render(
-			<Indep alignX="right" alignY="center" x=-10>
-				<Button textFamily="icomoon-ultimate" textColor="#fff" textSize=20 onClick="m_share">\uec84</Button>
+			<Indep alignX="right" alignY="center" x={-10}>
+				<Button textFamily="icomoon-ultimate" textColor="#fff" textSize={20} onClick="m_share">\uec84</Button>
 			</Indep>
 		);
 	}
@@ -128,19 +130,21 @@ class MyNavbar extends Navbar {
 
 export default class QRCode extends NavPage {
 
+	@prop name = '';
+
 	constructor() {
 		super();
 		this.title = '收款';
 		this.toolbar.hidden = true;
 		this.backgroundColor = '#353b4b';
-		this.navbar = <MyNavbar backgroundColor="#353b4b" border=0 />;
+		this.navbar = <MyNavbar backgroundColor="#353b4b" border={0} />;
 	}
 
-	_back() {
+	private _back() {
 		this.collection.pop(true);
 	}
 
-	_copy() {
+	private _copy() {
 		showTip('钱包地址已复制');
 	}
 
@@ -148,20 +152,18 @@ export default class QRCode extends NavPage {
 		return super.render(
 			<Div class="qrc">
 				<Div class="box1">
-					<Text class="txt1" value=this.name />
+					<Text class="txt1" value={this.name} />
 					<Button class="txt2" onClick="_copy">0xb5c4492ae07311Ab3CDa11C8481060A737CEa438 <TextNode class="txt2-1" value="\ueecb" /></Button>
 				</Div>
 				<Div class="box2">
 					<Text class="txt3" value="收款地址" />
-					<Image class="img1" src=resolve('../img/qr.png') />
+					<Image class="img1" src={resolve('../img/qr.png')} />
 				</Div>
 				<Indep class="box3">
-					<Image class="img2" src=resolve('../img/icon-8.jpg') />
+					<Image class="img2" src={resolve('../img/icon-8.jpg')} />
 				</Indep>
 			</Div>
 		);
 	}
 
 }
-
-QRCode.defineProps(['name']);

@@ -28,15 +28,16 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, Image, Indep, Input, CSS } from 'ngui';
+import { Div, Image, Indep, Input, default as ngui, _CVD } from 'ngui';
 import { NavPage } from 'ngui/nav';
 import { alert } from 'ngui/dialog';
 import { Btn } from '../btns';
 import MnemonicWord from './mnemonic_word';
+import {prop} from 'ngui/ctr';
 
 const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.wcreate': {
 		width: '100%',
 		height: '100%',
@@ -68,6 +69,9 @@ CSS({
  * @class Create
 */
 export default class Create extends NavPage {
+
+	@prop type = 0;
+
 	constructor() {
 		super();
 		this.title = '添加XXX钱包';
@@ -76,11 +80,11 @@ export default class Create extends NavPage {
 	render() {
 		return super.render(
 			<Div class="wcreate">
-				<Image class="img" src=(resolve(`../img/${this.type}-128.png`)) />
-				<Input class="input" textMargin=15 placeholder="钱包名称" />
-				<Input class="input" textMargin=15 security=1 placeholder="钱包密码" />
-				<Input class="input" textMargin=15 security=1 placeholder="重复输入密码" />
-				<Input class="input" textMargin=15 placeholder="密码提示信息" />
+				<Image class="img" src={resolve(`../img/${this.type}-128.png`)} />
+				<Input class="input" textMargin={15} placeholder="钱包名称" />
+				<Input class="input" textMargin={15} security={1} placeholder="钱包密码" />
+				<Input class="input" textMargin={15} security={1} placeholder="重复输入密码" />
+				<Input class="input" textMargin={15} placeholder="密码提示信息" />
 				<Indep class="G_btns">
 					<Btn onClick="m_handle_click">创建</Btn>
 				</Indep>
@@ -88,8 +92,6 @@ export default class Create extends NavPage {
 		);
 	}
 	m_handle_click() {
-		this.collection.push(<MnemonicWord />, 1);
+		this.collection.push(<MnemonicWord />, true);
 	}
 }
-
-Create.defineProps(['type']);

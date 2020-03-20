@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Indep,Button,Hybrid,Div,render, CSS, TextNode,
+	Indep,Button,Hybrid,Div, TextNode, default as ngui, _CVD
 } from 'ngui';
 import { NavPage, Toolbar, Navbar } from 'ngui/nav';
 import { alert } from 'ngui/dialog';
@@ -38,8 +38,10 @@ import IndexWallet from './index_wallet';
 import IndexPrice from './index_price';
 import IndexMy from './index_my';
 import WalletAdds from './wallet_adds';
+import {Event, GUIClickEvent} from 'ngui/event';
+import {prop} from 'ngui/ctr';
 
-CSS({
+ngui.css({
 	'.index': {
 		width: '100%',
 		height: '100%',
@@ -62,10 +64,10 @@ CSS({
  */
 class IndexNavbar extends Navbar {
 
-	m_handle_menu_item(e) {
+	private m_handle_menu_item(e: Event<number>) {
 		if (e.data == 0) {
 			// alert('添加钱包');
-			this.collection.push(<WalletAdds />, 1);
+			this.collection.push(<WalletAdds />, true);
 		} else if (e.data == 1) {
 			alert('扫一扫');
 		} else if (e.data == 2) {
@@ -73,20 +75,20 @@ class IndexNavbar extends Navbar {
 		}
 	}
 
-	m_handle_show_menu(e) {
-		render(
-			<Menu items=[
+	private m_handle_show_menu(e: GUIClickEvent) {
+		ngui.render<Menu>(
+			<Menu items={[
 				{icon:'\ueb4d',text:'添加钱包'},
 				{icon:'\ue9f8',text:'扫一扫'},
 				{icon:'\uea15',text:'收付款'},
-			] onItemAction=(e=>this.m_handle_menu_item(e)) />
+			]} onItemAction={(e:any)=>this.m_handle_menu_item(e)} />
 		).showOverlayFromView(e.sender);
 	}
 
 	render() {
 		return super.render(
-			<Indep alignX="right" alignY="center" x=-10>
-				<Button textFamily="icomoon-ultimate" textColor="#fff" textSize=20 onClick="m_handle_show_menu">\ued5d</Button>
+			<Indep alignX="right" alignY="center" x={-10}>
+				<Button textFamily="icomoon-ultimate" textColor="#fff" textSize={20} onClick="m_handle_show_menu">\ued5d</Button>
 			</Indep>
 		);
 	}
@@ -97,22 +99,24 @@ class IndexNavbar extends Navbar {
  */
 class IndexToolbar extends Toolbar {
 
-	m_handle_click(e) {
-		this.selected = e.sender.index;
+	@prop selected = 0;
+
+	private m_handle_click(e: GUIClickEvent) {
+		this.selected = (e.sender as any).index;
 	}
 
 	render() {
 		return super.render(
 			<Hybrid textAlign="center" width="full" height="full">
-				<Button onClick="m_handle_click" index=0 class="toolbar_btn" textColor=(this.selected==0?'#0079ff':'inherit')>
+				<Button onClick="m_handle_click" index={0} class="toolbar_btn" textColor={this.selected==0?'#0079ff':'inherit'}>
 					<TextNode value="\uea10" />
 					<TextNode value="\n钱包" class="txt" />
 				</Button>
-				<Button onClick="m_handle_click" index=1 class="toolbar_btn" textColor=(this.selected==1?'#0079ff':'inherit')>
+				<Button onClick="m_handle_click" index={1} class="toolbar_btn" textColor={this.selected==1?'#0079ff':'inherit'}>
 					<TextNode value="\ueb90" />
 					<TextNode value="\n行情" class="txt" />
 				</Button>
-				<Button onClick="m_handle_click" index=2 class="toolbar_btn" textColor=(this.selected==2?'#0079ff':'inherit')>
+				<Button onClick="m_handle_click" index={2} class="toolbar_btn" textColor={this.selected==2?'#0079ff':'inherit'}>
 					<TextNode value="\ueb08" />
 					<TextNode value="\n我" class="txt" />
 				</Button>
@@ -121,14 +125,14 @@ class IndexToolbar extends Toolbar {
 	}
 }
 
-IndexToolbar.defineProps({selected:0});
-
 /*
  * @class Index Page
  */
 export default class Index extends NavPage {
 
-	m_handle_update_toolbar(e) {
+	@prop selected = 0;
+
+	m_handle_update_toolbar(e: Event<void, IndexToolbar>) {
 		this.selected = e.sender.selected;
 		this.title = ['钱包', '行情', '我'][this.selected];
 	}
@@ -136,7 +140,7 @@ export default class Index extends NavPage {
 	constructor() {
 		super();
 		this.navbar = <IndexNavbar />;
-		this.toolbar = <IndexToolbar onUpdate=(e=>this.m_handle_update_toolbar(e)) />;
+		this.toolbar = <IndexToolbar onUpdate={(e:any)=>this.m_handle_update_toolbar(e)} />;
 	}
 
 	render() {
@@ -150,5 +154,3 @@ export default class Index extends NavPage {
 	}
 
 }
-
-Index.defineProps({selected:0});

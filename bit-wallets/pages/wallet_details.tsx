@@ -29,19 +29,21 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, Div, Scroll, 
-	Text, TextNode, Hybrid, 
-	Button, Image, Indep, 
-	atomPixel as px,
+	Div, Scroll,
+	Text, TextNode, Hybrid,
+	Button, Image, Indep,
+	default as ngui, _CVD
 } from 'ngui';
 import {alert} from 'ngui/dialog';
 import { NavPage, Navbar } from 'ngui/nav';
 import WalletSettings from './wallet_settings';
 import QRCode from './qrcode';
+import {GUIClickEvent} from 'ngui/event';
 
+const px = ngui.atomPixel;
 const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.wd': {
 		width: '100%',
 		height: '100%',
@@ -162,14 +164,14 @@ CSS({
 
 class MyNavbar extends Navbar {
 
-	m_handle_show_menu(e) {
+	m_handle_show_menu(e: GUIClickEvent) {
 		alert('扫一扫');
 	}
 
 	render() {
 		return super.render(
-			<Indep alignX="right" alignY="center" x=-10>
-				<Button textFamily="icomoon-ultimate" textColor="#000" textSize=20 onClick="m_handle_show_menu">\ue945</Button>
+			<Indep alignX="right" alignY="center" x={-10}>
+				<Button textFamily="icomoon-ultimate" textColor="#000" textSize={20} onClick="m_handle_show_menu">\ue945</Button>
 			</Indep>
 		);
 	}
@@ -199,13 +201,13 @@ export default class WalletDetails extends NavPage {
 					<Button class="txt2" onClick="_setting">\uec6a</Button>
 					<Button class="txt3" onClick="_showQrcode">0xb5c4492ae07311Ab3CDa11C8481060A737CEa438</Button> 
 					<Button class="txt4" onClick="_showQrcode">\ue9f8</Button>
-					<Hybrid class="txt5"><TextNode value="￥" textSize=14 y=-6 />0.00</Hybrid>
+					<Hybrid class="txt5"><TextNode value="￥" textSize={14} y={-6} />0.00</Hybrid>
 				</Div>
 				<Text class="txt6" value="资产" />
 				{/* <Button class="btn1" onClick=(e=>alert('test3'))>\ued5d</Button> */}
 				<Div class="list">
 					<Div class="item">
-						<Image class="img1" src=resolve('../img/ETH-128.png') />
+						<Image class="img1" src={resolve('../img/ETH-128.png')} />
 						<Text class="txt7" value="ETH" />
 						<Hybrid class="txt8">0\n<TextNode class="txt9" value="￥0.00" /></Hybrid>
 					</Div>

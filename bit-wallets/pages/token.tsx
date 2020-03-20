@@ -28,12 +28,12 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div,CSS } from 'ngui';
+import { Div, default as ngui, _CVD } from 'ngui';
 import { NavPage } from 'ngui/nav';
 
 const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.token': {
 		// TODO ...
 	},

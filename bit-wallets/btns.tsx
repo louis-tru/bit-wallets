@@ -106,8 +106,8 @@ export class NavBtn extends ViewController {
 	@prop small: boolean = false;
 	@prop big: boolean = false;
 
-	@event readonly onClick: EventNoticer<GUIClickEvent>;
-	
+	@event readonly onClick: EventNoticer<GUIClickEvent<void, NavBtn>>;
+
 	render() {
 		return (
 			<Div class={`iwitem ${this.small?'small':this.big?'big':''}`} onClick={this.onClick}>
@@ -136,7 +136,7 @@ export class NavBtnPrice extends ViewController {
 	@prop money = 0;
 	@prop desc = '';
 
-	@event readonly onClick: EventNoticer<GUIClickEvent>;
+	@event readonly onClick: EventNoticer<GUIClickEvent<void, NavBtnPrice>>;
 
 	render() {
 		return (
@@ -203,7 +203,7 @@ export class Btn extends ViewController {
 	@prop color = '';
 	@prop class = '';
 
-	@event readonly onClick: EventNoticer<GUIClickEvent>;
+	@event readonly onClick: EventNoticer<GUIClickEvent<void, Btn>>;
 
 	render(...vdoms: any[]) {
 		return (

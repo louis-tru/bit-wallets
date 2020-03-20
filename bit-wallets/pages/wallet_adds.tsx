@@ -28,12 +28,13 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import { Div, ngui } from 'ngui';
+import { Div, default as ngui, _CVD } from 'ngui';
 import { NavPage } from 'ngui/nav';
 import { sheetConfirm } from 'ngui/dialog';
 import { NavBtn } from '../btns';
 import Create from './wallet_create';
 import Import from './wallet_import';
+import {GUIClickEvent} from 'ngui/event';
 
 const {resolve} = require;
 
@@ -48,15 +49,15 @@ export default class WalletAdds extends NavPage {
 		this.toolbar.hidden = true;
 	}
 	
-	m_handle_click(e) {
+	m_handle_click(e: GUIClickEvent) {
 		var type = e.sender.id;
 		sheetConfirm(['创建','导入',`了解${type}`], (index)=>{
 			if (index == 3) {
-				this.collection.push(<Create type=type title=`创建${type}钱包` />, 1);
+				this.collection.push(<Create type={type} title={`创建${type}钱包`} />, true);
 			} else if (index == 2) {
-				this.collection.push(<Import type=type title=`导入${type}钱包` />, 1);
+				this.collection.push(<Import type={type} title={`导入${type}钱包`} />, true);
 			} else if (index == 1) {
-				var tokens = {
+				var tokens: Dict = {
 					BTC: 'bitcoin',
 					ETH: 'ethereum',
 					EOS: 'eos',
@@ -70,10 +71,10 @@ export default class WalletAdds extends NavPage {
 	render() {
 		return super.render(
 			<Div class="index">
-				<NavBtn id="BTC" icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click" text="BTC" desc="支持USDT" />
-				<NavBtn id="ETH" icon=(resolve('../img/ETH-128.png')) onClick="m_handle_click" text="ETH" />
-				<NavBtn id="EOS" icon=(resolve('../img/EOS-128.png')) onClick="m_handle_click" text="EOS" />
-				<NavBtn id="DOT" icon=(resolve('../img/DOT-128.png')) onClick="m_handle_click" text="DOT" />
+				<NavBtn id="BTC" icon={resolve('../img/BTC-128.png')} onClick="m_handle_click" text="BTC" desc="支持USDT" />
+				<NavBtn id="ETH" icon={resolve('../img/ETH-128.png')} onClick="m_handle_click" text="ETH" />
+				<NavBtn id="EOS" icon={resolve('../img/EOS-128.png')} onClick="m_handle_click" text="EOS" />
+				<NavBtn id="DOT" icon={resolve('../img/DOT-128.png')} onClick="m_handle_click" text="DOT" />
 			</Div>
 		);
 	}

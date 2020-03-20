@@ -28,14 +28,15 @@
  * 
  * ***** END LICENSE BLOCK ***** */
 
-import {Div, CSS, Image, Text, Hybrid} from 'ngui';
+import {Div, Image, Text, Hybrid, default as ngui, _CVD} from 'ngui';
 import { NavPage } from 'ngui/nav';
 import { Switch } from 'ngui/checkbox';
 import * as dialog from '../dialog';
+import {Event} from 'ngui/event';
 
 const resolve = require.resolve;
 
-CSS({
+ngui.css({
 	'.nosp': {
 		width: '100%',
 		height: '100%',
@@ -91,13 +92,14 @@ export default class NoSecretPayment extends NavPage {
 		this.toolbar.hidden = true;
 	}
 
-	m_set_switch(ok) {
-		this.IDs._switch.onChange = null; // delete default listener
-		this.IDs._switch.selected = ok;
-		this.IDs._switch.onChange = "m_handle_change";
+	m_set_switch(ok: boolean) {
+		var _switch = this.find<Switch>('_switch');
+		_switch.addDefaultListener('Change', null); // delete default listener
+		_switch.selected = ok;
+		_switch.addDefaultListener('Change', 'm_handle_change');
 	}
 
-	m_handle_change(e) {
+	m_handle_change(e: Event<boolean, Switch>) {
 		if (e.data) {
 			dialog.fingerprint(e=>{
 				if (e) {
@@ -121,7 +123,7 @@ export default class NoSecretPayment extends NavPage {
 		return super.render(
 			<Div class="nosp">
 				<Div class="div1">
-					<Image class="img1" src=resolve('../img/icon-5.png') />
+					<Image class="img1" src={resolve('../img/icon-5.png')} />
 				</Div>
 				<Div class="div2">
 					<Text class="txt1" value="指纹识别" />

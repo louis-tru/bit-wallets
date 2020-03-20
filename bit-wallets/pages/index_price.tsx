@@ -29,10 +29,10 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Div, Hybrid, CSS, ViewController
+	Div, Hybrid, ViewController, default as ngui, _CVD
 } from 'ngui';
 
-CSS({
+ngui.css({
 
 });
 
@@ -41,7 +41,7 @@ export default class IndexPrice extends ViewController {
 	render() {
 		return (
 			<Div class="index">
-				<Hybrid textAlign="center" width="100%" height=20 margin="auto">行情</Hybrid>
+				<Hybrid textAlign="center" width="100%" height={20} margin="auto">行情</Hybrid>
 			</Div>
 		);
 	}

@@ -29,17 +29,14 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, Div, Text, Button
+	Div, Text, Button, default as ngui, _CVD
 } from 'ngui';
 import {NavPage} from 'ngui/nav';
-import {NavBtn} from '../btns';
-import NoSecretPayment from './no_secret_payment';
-import {prompt,alert} from '../dialog';
-import BackupTip from './backup_tip';
+import {prop} from 'ngui/ctr';
 
-var {resolve} = require;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.pp': {
 		width: '100%',
 		height: '100%',
@@ -73,6 +70,9 @@ CSS({
  */
 export default class PassworkPrompt extends NavPage {
 
+	@prop showPw = false
+	@prop prompt = '';
+
 	constructor() {
 		super();
 		this.title = '密码提示信息';
@@ -80,21 +80,19 @@ export default class PassworkPrompt extends NavPage {
 	}
 
 	render() {
-		var prompt = this.modle.showPw ? this.prompt: Array(this.prompt.length + 1).join('●');
+		var prompt = this.showPw ? this.prompt: Array(this.prompt.length + 1).join('●');
 		return super.render(
 			<Div class="pp">
 				<Div class="G_nav_space" />
 				<Div class="box1">
-					<Text class="txt1" value=prompt />
-					<Button class="txt2" onClick="m_handle_click1">{this.modle.showPw?'\uecb1':'\uecb2'}</Button>
+					<Text class="txt1" value={prompt} />
+					<Button class="txt2" onClick="m_handle_click1">{this.showPw?'\uecb1':'\uecb2'}</Button>
 				</Div>
 			</Div>
 		);
 	}
 
 	m_handle_click1() {
-		this.modle = {showPw:!this.modle.showPw};
+		this.showPw = !this.showPw;
 	}
 }
-
-PassworkPrompt.defineProps({prompt: ''});

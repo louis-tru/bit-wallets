@@ -29,20 +29,21 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, atomPixel as px,
+	default as ngui, _CVD,
 	Div, Text, TextNode, Image, Hybrid, Indep, 
 } from 'ngui';
 import {NavPage} from 'ngui/nav';
 import {Btn} from '../btns';
-import {sheet,alert} from 'ngui/dialog';
-import * as utils from 'ngui/util';
+import {sheet} from 'ngui/dialog';
+import utils from 'ngui/util';
 import MnemonicWord from './mnemonic_word';
 import ExportKeystore from './export_keystore';
 import ExportPrivkey from './export_keystore';
+import {prop} from 'ngui/ctr';
 
-var {resolve} = require;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.bt': {
 		width: '100%',
 		height: '100%',
@@ -89,6 +90,8 @@ CSS({
  */
 export default class BackupTip extends NavPage {
 
+	@prop type = 1;
+
 	constructor() {
 		super();
 		this.title = '备份提示';
@@ -99,7 +102,7 @@ export default class BackupTip extends NavPage {
 		return super.render(
 			<Div class="bt">
 				<Text class="txt1" value="获取 Keystore 和密码等于找拥有钱包资产所有权" />
-				<Image class="img1" src=resolve('../img/icon-2_06.png') />
+				<Image class="img1" src={resolve('../img/icon-2_06.png')} />
 				<Hybrid class="txt2">`<TextNode class="t1" value="●" />   备份 Keystore</Hybrid>
 				<Text class="txt3" value="请妥善备份 Keystore 和密码\n如果你的手机丢失、被盗、损坏，Keystore 将可以恢复你的资产" />
 				<Hybrid class="txt2">`<TextNode class="t1" value="●" />   离线保管</Hybrid>
@@ -127,9 +130,7 @@ export default class BackupTip extends NavPage {
 
 }
 
-BackupTip.defineProps({type: 1});
-
-CSS({
+ngui.css({
 	'.bt_s': {
 		width: 'full',
 		margin: '9',
@@ -165,18 +166,18 @@ CSS({
 	},
 });
 
-export function sheetTip(cb=utils.noop) {
+export function sheetTip(cb: (index:number)=>void=utils.noop) {
 	return sheet(
 		<Div class="bt_s">
-			<Image class="img1" src=resolve('../img/icon-3.png') />
+			<Image class="img1" src={resolve('../img/icon-3.png')} />
 			<Text class="txt1" value="请勿截屏" />
 			<Text class="txt2" value="请勿截屏分享和存储，这将可能被第三方恶意软件收集，造成资产损失" />
 			<Div class="btn0">
 				<Div class="btn1">
-					<Btn color="light" onClick=(e=>cb(0))>取消</Btn>
+					<Btn color="light" onClick={()=>cb(0)}>取消</Btn>
 				</Div>
 				<Div class="btn1">
-					<Btn onClick=(e=>cb(1))>知道了</Btn>
+					<Btn onClick={()=>cb(1)}>知道了</Btn>
 				</Div>
 			</Div>
 		</Div>

@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, Div, Button, 
+	Div, Button, _CVD, default as ngui,
 } from 'ngui';
 import {NavPage} from 'ngui/nav';
 import {NavBtn} from '../btns';
@@ -38,9 +38,9 @@ import BackupTip from './backup_tip';
 import PasswordPrompt from './password_prompt';
 import {prompt,alert} from '../dialog';
 
-var {resolve} = require;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.ws': {
 		width: '100%',
 		height: '100%',
@@ -79,13 +79,13 @@ export default class WalletSettings extends NavPage {
 		return super.render(
 			<Div class="ws">
 				<Div class="G_nav_space" />
-				<NavBtn big=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click1" text="啊啊啊啊" desc="0x2afC7D19...DBd7354Cd9" />
+				<NavBtn big={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click1" text="啊啊啊啊" desc="0x2afC7D19...DBd7354Cd9" />
 				<Div class="G_nav_space" />
-				<NavBtn small=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click2" text="密码提示信息" />
-				<NavBtn small=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click3" text="免密支付" />
-				<NavBtn small=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click4" text="导出助记词" />
-				<NavBtn small=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click5" text="导出Keystore" />
-				<NavBtn small=1 icon=(resolve('../img/BTC-128.png')) onClick="m_handle_click6" text="导出私钥" />
+				<NavBtn small={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click2" text="密码提示信息" />
+				<NavBtn small={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click3" text="免密支付" />
+				<NavBtn small={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click4" text="导出助记词" />
+				<NavBtn small={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click5" text="导出Keystore" />
+				<NavBtn small={1} icon={resolve('../img/BTC-128.png')} onClick="m_handle_click6" text="导出私钥" />
 				<Div class="G_nav_space" />
 				<Button class="btn" onClick="m_handle_click1">删除钱包</Button>
 				<Div class="G_nav_space" />
@@ -93,38 +93,38 @@ export default class WalletSettings extends NavPage {
 		);
 	}
 
-	m_handle_click1() {
+	private m_handle_click1() {
 		// TODO ...
 	}
 
-	m_handle_click2() {
+	private m_handle_click2() {
 		this.collection.push(<PasswordPrompt prompt="123456" />, true);
 	}
 
-	m_handle_click3() {
+	private m_handle_click3() {
 		this.collection.push(<NoSecretPayment />, true);
 	}
 
-	m_handle_click4() {
+	private m_handle_click4() {
 		this._export(1);
 	}
 
-	m_handle_click5() {
+	private m_handle_click5() {
 		this._export(2);
 	}
 
-	m_handle_click6() {
+	private m_handle_click6() {
 		this._export(3);
 	}
 
-	_export(type) {
+	private _export(type: number) {
 		prompt({msg: '请输入密码', security: true, placeholder: '请输入密码' }, (ok, pwd)=>{
 			if (ok) {
 				// Verify password
 				// if (!pwd) {
 				// 	return alert('密码不正确');
 				// }
-				this.collection.push(<BackupTip type=type />, true);
+				this.collection.push(<BackupTip type={type} />, true);
 			}
 		});
 	}

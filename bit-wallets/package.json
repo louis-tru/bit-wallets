@@ -4,7 +4,6 @@
 	"id": "org.ngui.bit-wallets",
 	"main": "main.jsx",
 	"version": "1.0.0",
-	"skip": ["pages"],
 	"dependencies": {
 		"dncc": "~0.1.7"
 	},

@@ -29,7 +29,7 @@
  * ***** END LICENSE BLOCK ***** */
 
 import { 
-	Div,Scroll,
+	Div,Scroll, _CVD
 } from 'ngui';
 import { NavPage } from 'ngui/nav';
 import { Btn } from '../btns';
@@ -45,13 +45,13 @@ export default class Test extends NavPage {
 	render() {
 		return super.render(
 			<Scroll width="100%" height="100%">
-				<Div width="100%" height=5 />
-				<Btn onClick=(e=>this.collection.push(Index, 1))>Index</Btn>
-				<Btn onClick=(e=>this.collection.push(ExportKeystore, 1))>ExportKeystore</Btn>
-				<Btn onClick=(e=>this.collection.push(BackupTip, 1))>BackupTip</Btn>
-				<Btn onClick=(e=>this.collection.push(WalletSettings, 1))>WalletSettings</Btn>
-				<Btn onClick=(e=>this.collection.push(MnemonicWord, 1))>MnemonicWord</Btn>
-				<Btn onClick=(e=>this.collection.push(NoSecretPayment, 1))>NoSecretPayment</Btn>
+				<Div width="100%" height={5} />
+				<Btn onClick={()=>this.collection.push(Index, true)}>Index</Btn>
+				<Btn onClick={()=>this.collection.push(ExportKeystore, true)}>ExportKeystore</Btn>
+				<Btn onClick={()=>this.collection.push(BackupTip, true)}>BackupTip</Btn>
+				<Btn onClick={()=>this.collection.push(WalletSettings, true)}>WalletSettings</Btn>
+				<Btn onClick={()=>this.collection.push(MnemonicWord, true)}>MnemonicWord</Btn>
+				<Btn onClick={()=>this.collection.push(NoSecretPayment, true)}>NoSecretPayment</Btn>
 			</Scroll>
 		);
 	}

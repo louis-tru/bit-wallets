@@ -29,21 +29,21 @@
  * ***** END LICENSE BLOCK ***** */
 
 import {
-	CSS, render,
-	Div as div, 
-	Text as text, 
-	Image as img, 
-	Button as button, 
-	Indep as indep, 
-	atomPixel as px,
+	Div,
+	Text,
+	Image,
+	Button,
+	Indep, _CVD,
+	default as ngui,
 } from 'ngui';
 import {NavPage} from 'ngui/nav';
 import { Btn } from '../btns';
 import Tip from '../tip';
 
-var {resolve} = require;
+const px = ngui.atomPixel;
+const {resolve} = require;
 
-CSS({
+ngui.css({
 	'.mw': {
 		width: '100%',
 		height: '100%',
@@ -63,7 +63,7 @@ CSS({
 		textColor: '#757575',
 		textStyle: 'bold',
 		// backgroundColor: '#f00',
-		// textBackgroundColor: '#ff0',
+		// TextBackgroundColor: '#ff0',
 	},
 	'.mw .txt2': {
 		width: '100%',
@@ -73,7 +73,7 @@ CSS({
 		textSize: 14,
 		textColor: '#777a8b',
 		// backgroundColor: '#ff0',
-		// textBackgroundColor: '#f00',
+		// TextBackgroundColor: '#f00',
 	},
 	'.mw .line': {
 		width: 'full',
@@ -116,41 +116,41 @@ export default class MnemonicWord extends NavPage {
 
 	render() {
 		return super.render(
-			<div class="mw">
-				<img class="img" src=resolve('../img/icon-1.png') />
-				{/* <text class="txt1" value="备份助记词" /> */}
-				<text class="txt2" value="请准备抄写并安全备份助记词" />
-				<div class="line" />
-				<div class="box1">
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="rather" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="also" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="insane" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="pencil" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="almost" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="ahead" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="effort" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="embrace" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="bleak" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="twenty" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="music" /></button>
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="minor" /></button>
-				</div>
-				<div class="line" />
-				<div class="box1 box2">
-					<button class="btn" onClick="m_handle_click_1"><text class="txt3" value="music" /></button>
-				</div>
-				<indep class="G_btns">
+			<Div class="mw">
+				<Image class="img" src={resolve('../img/icon-1.png')} />
+				{/* <Text class="txt1" value="备份助记词" /> */}
+				<Text class="txt2" value="请准备抄写并安全备份助记词" />
+				<Div class="line" />
+				<Div class="box1">
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="rather" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="also" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="insane" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="pencil" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="almost" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="ahead" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="effort" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="embrace" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="bleak" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="twenty" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="music" /></Button>
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="minor" /></Button>
+				</Div>
+				<Div class="line" />
+				<Div class="box1 box2">
+					<Button class="btn" onClick="m_handle_click_1"><Text class="txt3" value="music" /></Button>
+				</Div>
+				<Indep class="G_btns">
 					<Btn onClick="m_handle_click">下一步</Btn>
-				</indep>
-			</div>
+				</Indep>
+			</Div>
 		);
 	}
 
-	m_handle_click_1() {
-		render(<Tip value="助记词顺序正确" icon="ok" />).show();
+	private m_handle_click_1() {
+		ngui.render<Tip>(<Tip value="助记词顺序正确" icon="ok" />).show();
 	}
 
-	m_handle_click() {
+	private m_handle_click() {
 
 	}
 }
