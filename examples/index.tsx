@@ -105,7 +105,7 @@ function review_code(evt: GUIClickEvent) {
 	evt.sender.ownerAs<Page>().collection.push(review_vx(), true);
 }
 
-const ngui_tools = 'https://www.npmjs.com/package/nxmake';
+const ngui_tools = 'https://www.npmjs.com/package/nxp';
 const ngui_tools_issues_url = 'https://github.com/louis-tru/ngui/issues';
 const examples_source = 'https://github.com/louis-tru/ngui.git';
 const documents = 'http://ngui.fun/';
@@ -128,7 +128,7 @@ class DefaultToolbar extends Toolbar {
 		return super.render(
 			<Hybrid textAlign="center" width="full" height="full">
 				<Button onClick={review_code}>
-					<Text class="toolbar_btn" value="\ue9ab" />
+					<Text class="toolbar_btn" value={"\ue9ab"} />
 				</Button>
 			</Hybrid>
 		);
@@ -139,7 +139,7 @@ const ngui_tools_vx = ()=>(
 	<Mynavpage title="Ngui Tools" source={resolve(__filename)}>
 		<Div width="full">
 			<Hybrid class="category_title">
-`1. You can use nodejs <T textBackgroundColor="#ddd" value="npm install -g nxmake" />.
+`1. You can use nodejs <T textBackgroundColor="#ddd" value="npm install -g nxp" />.
 2. Or get the node modules from Github.`
 			</Hybrid>
 			<Button class="long_btn rm_margin_top" onClick={handle_go_to} url={ngui_tools}>Go Github</Button>
@@ -187,17 +187,19 @@ var app = new GUIApplication({
 }).start(
 	<Root>
 
-		<NavPageCollection id="npc" defaultToolbar={DefaultToolbar}>
+		<NavPageCollection id="npc" defaultToolbar={<DefaultToolbar />}>
 			<Mynavpage title="Home" source={resolve(__filename)}>
 
 				<Scroll width="full" height="full" bounceLock={0}>
 
 					<Text class="hello" value="Hello." />
 					<Div class="category" borderBottom={`${px} #c8c7cc`}>
-						<Hybrid class="codepre"><T class="keywork" value="import"/> {"{"} <T class="identifier" value="GUIApplication" />, <T class="identifier" value="Root" /> {"}"} <T class="keywork" value="from" /> <T class="str" value="'ngui'" />
-<T class="keywork" value="new"/> <T class="identifier" value="GUIApplication"/>()<T class="keywork" value="."/><T class="identifier" value="start"/>(
-	{"<"}<T class="tag_name" value="Root" />{">"}hello world!{"</"}<T class="tag_name" value="Root" />{"\>"}
-)
+						<Hybrid class="codepre">
+							<T class="keywork" value="import"/> {"{"} <T class="identifier" value="GUIApplication" />, <T class="identifier" value="Root" /> {"}"} <T class="keywork" value="from" /> <T class="str" value="'ngui'" />
+								<T class="keywork" value={'\nnew'}/> <T class="identifier" value="GUIApplication"/>()<T class="keywork" value="."/><T class="identifier" value="start"/>
+								(
+									{"<"}<T class="tag_name" value="Root" />{">"}hello world!{"</"}<T class="tag_name" value="Root" />{">"}
+								)
 						</Hybrid>
 					</Div>
 
